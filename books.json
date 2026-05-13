@@ -71,9 +71,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781488051241-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.802506"
+      "addedAt": "2026-05-13T11:26:07.802506",
+      "isbn": "9781488051241"
     },
     {
       "id": "90ff475f-a84a-4663-9ea1-e883e9f332fc",
@@ -83,12 +84,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Inglês",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-08-25",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781250841001-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.802699"
+      "addedAt": "2026-05-13T11:26:07.802699",
+      "isbn": "9781250841001"
     },
     {
       "id": "1ed8f292-d150-45a7-9e42-9b6a9d3ae38d",
@@ -98,12 +100,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Inglês",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-09-06",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316586009-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.802905"
+      "addedAt": "2026-05-13T11:26:07.802905",
+      "isbn": "9780316586009"
     },
     {
       "id": "b2e0fead-8c92-4ad3-af2b-b0d4863ce8f6",
@@ -113,12 +116,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Inglês",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-09-23",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780316572132-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.803109"
+      "addedAt": "2026-05-13T11:26:07.803109",
+      "isbn": "9780316572132"
     },
     {
       "id": "4edda585-0414-4569-82c1-47587b440bcf",
@@ -143,9 +147,9 @@
       "status": "lido",
       "location": "kindle",
       "language": "Inglês",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
+      "endDate": "2024-01-09",
       "coverUrl": null,
       "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.803510"
@@ -161,9 +165,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786586490169-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.835341"
+      "addedAt": "2026-05-13T11:26:07.835341",
+      "isbn": "9786586490169"
     },
     {
       "id": "43a269c1-6d9e-4946-9584-c3a6d934daeb",
@@ -176,9 +181,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9783030445843-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.803828"
+      "addedAt": "2026-05-13T11:26:07.803828",
+      "isbn": "9783030445843"
     },
     {
       "id": "3616b23a-e340-48af-8162-5901fb4b87d4",
@@ -191,9 +197,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097413-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.804028"
+      "addedAt": "2026-05-13T11:26:07.804028",
+      "isbn": "9781542097413"
     },
     {
       "id": "a0147924-df7e-47f1-9cab-582643b47a90",
@@ -206,9 +213,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781449368395-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.804230"
+      "addedAt": "2026-05-13T11:26:07.804230",
+      "isbn": "9781449368395"
     },
     {
       "id": "1d5442a3-735e-43d5-90a3-ad567aae0a85",
@@ -236,9 +244,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099547-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.805135"
+      "addedAt": "2026-05-13T11:26:07.805135",
+      "isbn": "9781542099547"
     },
     {
       "id": "ca5fe32d-1497-4c85-ab98-dc68aee54d44",
@@ -251,9 +260,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9783319624617-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.805904"
+      "addedAt": "2026-05-13T11:26:07.805904",
+      "isbn": "9783319624617"
     },
     {
       "id": "ed9aa478-b6c1-4044-af4e-7ab2b6b9cca5",
@@ -296,9 +306,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099301-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.807666"
+      "addedAt": "2026-05-13T11:26:07.807666",
+      "isbn": "9781542099301"
     },
     {
       "id": "78f5120f-a885-4d14-b6df-4c31483e60d0",
@@ -326,9 +337,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781491925461-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.808788"
+      "addedAt": "2026-05-13T11:26:07.808788",
+      "isbn": "9781491925461"
     },
     {
       "id": "e2038bd3-24e4-4162-b051-35f4ef3676a6",
@@ -356,9 +368,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097673-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.810164"
+      "addedAt": "2026-05-13T11:26:07.810164",
+      "isbn": "9781542097673"
     },
     {
       "id": "8c989834-bfda-4791-9969-33529f3df5e3",
@@ -371,9 +384,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542096157-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.811055"
+      "addedAt": "2026-05-13T11:26:07.811055",
+      "isbn": "9781542096157"
     },
     {
       "id": "dbd1d23e-c713-48b5-9f8c-a75fa6ca80df",
@@ -401,9 +415,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097567-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.811870"
+      "addedAt": "2026-05-13T11:26:07.811870",
+      "isbn": "9781542097567"
     },
     {
       "id": "5cc42419-fbc3-4b29-b5a2-4f6e4a998515",
@@ -416,9 +431,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781350017979-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.812202"
+      "addedAt": "2026-05-13T11:26:07.812202",
+      "isbn": "9781350017979"
     },
     {
       "id": "61001dec-e9b3-4ede-b81c-343d2bb980b7",
@@ -446,9 +462,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097574-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.812814"
+      "addedAt": "2026-05-13T11:26:07.812814",
+      "isbn": "9781542097574"
     },
     {
       "id": "2085332c-d8e5-48bf-8dd1-b0cd00f0e3b8",
@@ -476,9 +493,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099370-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.813387"
+      "addedAt": "2026-05-13T11:26:07.813387",
+      "isbn": "9781542099370"
     },
     {
       "id": "c142abb0-71ed-4401-a104-542617d4acc3",
@@ -491,9 +509,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9783030531997-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.813660"
+      "addedAt": "2026-05-13T11:26:07.813660",
+      "isbn": "9783030531997"
     },
     {
       "id": "e09a4da9-36a7-451b-9c79-7806f8cca67f",
@@ -506,9 +525,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781473030596-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.813946"
+      "addedAt": "2026-05-13T11:26:07.813946",
+      "isbn": "9781473030596"
     },
     {
       "id": "99c44607-0595-4337-8933-b1395dff084d",
@@ -536,9 +556,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099110-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.814468"
+      "addedAt": "2026-05-13T11:26:07.814468",
+      "isbn": "9781542099110"
     },
     {
       "id": "1c5e5c08-c494-42c9-a4ff-8f89bcf87a13",
@@ -551,9 +572,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099103-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.814719"
+      "addedAt": "2026-05-13T11:26:07.814719",
+      "isbn": "9781542099103"
     },
     {
       "id": "c4fbbab1-5470-45cf-955c-1ed80cce2429",
@@ -566,9 +588,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099271-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.814969"
+      "addedAt": "2026-05-13T11:26:07.814969",
+      "isbn": "9781542099271"
     },
     {
       "id": "0053f7a9-fd90-4d88-ac23-46d9e0c9b4f0",
@@ -611,9 +634,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099356-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.815720"
+      "addedAt": "2026-05-13T11:26:07.815720",
+      "isbn": "9781542099356"
     },
     {
       "id": "9da19375-46ff-41bd-824d-08755364d69d",
@@ -626,9 +650,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097482-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.815983"
+      "addedAt": "2026-05-13T11:26:07.815983",
+      "isbn": "9781542097482"
     },
     {
       "id": "a28ca7fa-a18b-4954-87d3-afac9068cb1c",
@@ -686,9 +711,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097581-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.817045"
+      "addedAt": "2026-05-13T11:26:07.817045",
+      "isbn": "9781542097581"
     },
     {
       "id": "d0a98573-d0ec-482c-bca5-8efd4e9b360c",
@@ -701,9 +727,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781136169441-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.817313"
+      "addedAt": "2026-05-13T11:26:07.817313",
+      "isbn": "9781136169441"
     },
     {
       "id": "503b6f08-7280-4f81-8ea0-34b4a0a1f5b6",
@@ -716,9 +743,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099332-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.817582"
+      "addedAt": "2026-05-13T11:26:07.817582",
+      "isbn": "9781542099332"
     },
     {
       "id": "718ff317-f76b-44cd-9477-183a87af1c5c",
@@ -746,9 +774,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781472930156-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.818115"
+      "addedAt": "2026-05-13T11:26:07.818115",
+      "isbn": "9781472930156"
     },
     {
       "id": "aed05e01-4087-4faa-a706-4fbf470678db",
@@ -806,9 +835,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099653-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.819184"
+      "addedAt": "2026-05-13T11:26:07.819184",
+      "isbn": "9781542099653"
     },
     {
       "id": "b52e4306-8629-4e32-bb11-ffbcdd273c6c",
@@ -851,9 +881,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542099523-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.819982"
+      "addedAt": "2026-05-13T11:26:07.819982",
+      "isbn": "9781542099523"
     },
     {
       "id": "3c028693-3968-4e7b-89a8-fe7a2cea1222",
@@ -866,9 +897,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542098649-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.820250"
+      "addedAt": "2026-05-13T11:26:07.820250",
+      "isbn": "9781542098649"
     },
     {
       "id": "882d7380-0bbf-4d20-8f6f-ebd4d93e623a",
@@ -881,9 +913,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097697-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.820550"
+      "addedAt": "2026-05-13T11:26:07.820550",
+      "isbn": "9781542097697"
     },
     {
       "id": "ad481d51-3602-45e7-bfb4-63eb77af2ac4",
@@ -926,9 +959,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781542097659-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.821563"
+      "addedAt": "2026-05-13T11:26:07.821563",
+      "isbn": "9781542097659"
     },
     {
       "id": "8f69159e-2628-4097-873b-f7c7b629463b",
@@ -956,9 +990,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786556743288-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.822868"
+      "addedAt": "2026-05-13T11:26:07.822868",
+      "isbn": "9786556743288"
     },
     {
       "id": "adf6bb66-72eb-48aa-aeb1-41bac02e3e9d",
@@ -971,9 +1006,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9787780035019-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.823416"
+      "addedAt": "2026-05-13T11:26:07.823416",
+      "isbn": "9787780035019"
     },
     {
       "id": "a40a07ec-3caf-4b61-a322-37ef878018d9",
@@ -983,12 +1019,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-10-14",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788525061065-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.823993"
+      "addedAt": "2026-05-13T11:26:07.823993",
+      "isbn": "9788525061065"
     },
     {
       "id": "c29cfb79-7bbf-4873-ae9a-61af7b082d83",
@@ -998,12 +1035,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-06-18",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786556670010-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.824619"
+      "addedAt": "2026-05-13T11:26:07.824619",
+      "isbn": "9786556670010"
     },
     {
       "id": "a1f04809-73a9-4918-9776-4876ff069ef3",
@@ -1028,12 +1066,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 2,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-12-01",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786560000476-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.825812"
+      "addedAt": "2026-05-13T11:26:07.825812",
+      "isbn": "9786560000476"
     },
     {
       "id": "71ecb4ee-e23d-4428-97dd-bc51d53d236a",
@@ -1043,12 +1082,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-12-20",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788588808294-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.826860"
+      "addedAt": "2026-05-13T11:26:07.826860",
+      "isbn": "9788588808294"
     },
     {
       "id": "eaaadff0-766f-495a-86f2-95e219a882b0",
@@ -1058,12 +1098,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-07-22",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786555953282-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.827398"
+      "addedAt": "2026-05-13T11:26:07.827398",
+      "isbn": "9786555953282"
     },
     {
       "id": "068b07a5-398c-440f-8522-e33a70c24ee9",
@@ -1073,12 +1114,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-04-03",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788501028723-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.827804"
+      "addedAt": "2026-05-13T11:26:07.827804",
+      "isbn": "9788501028723"
     },
     {
       "id": "3164bfdc-70d3-46f6-bbb0-ee284e584bdf",
@@ -1088,9 +1130,9 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 2,
       "startDate": null,
-      "endDate": null,
+      "endDate": "2025-11-18",
       "coverUrl": null,
       "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.828173"
@@ -1118,12 +1160,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-10-20",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786558620990-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.828980"
+      "addedAt": "2026-05-13T11:26:07.828980",
+      "isbn": "9786558620990"
     },
     {
       "id": "828f0018-f064-46f5-8c68-1b192bf1b1c6",
@@ -1133,12 +1176,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-01-08",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788501012074-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.829420"
+      "addedAt": "2026-05-13T11:26:07.829420",
+      "isbn": "9788501012074"
     },
     {
       "id": "7577af0b-5e4d-48f2-b02c-415ace364c2b",
@@ -1148,12 +1192,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2026-01-06",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788543803517-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.829679"
+      "addedAt": "2026-05-13T11:26:07.829679",
+      "isbn": "9788543803517"
     },
     {
       "id": "41700b14-272c-4e2d-9ec0-363fcef7a330",
@@ -1163,12 +1208,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-01-13",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788579621383-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.829931"
+      "addedAt": "2026-05-13T11:26:07.829931",
+      "isbn": "9788579621383"
     },
     {
       "id": "644aa7a5-cce0-4ef2-9433-9333a90761ac",
@@ -1193,12 +1239,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-11-18",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788543806068-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.830413"
+      "addedAt": "2026-05-13T11:26:07.830413",
+      "isbn": "9788543806068"
     },
     {
       "id": "4922e9a3-e87f-4fef-a4f1-e36c66318239",
@@ -1208,12 +1255,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-02-11",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788595980044-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.830630"
+      "addedAt": "2026-05-13T11:26:07.830630",
+      "isbn": "9788595980044"
     },
     {
       "id": "a0e32961-231e-4cfe-a7e6-de1e80cb6eeb",
@@ -1223,12 +1271,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-12-01",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788525064431-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.830843"
+      "addedAt": "2026-05-13T11:26:07.830843",
+      "isbn": "9788525064431"
     },
     {
       "id": "71d3ee81-6bf4-42cb-8692-246cb178cc5c",
@@ -1238,12 +1287,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-10-25",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788525063496-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.831058"
+      "addedAt": "2026-05-13T11:26:07.831058",
+      "isbn": "9788525063496"
     },
     {
       "id": "efc2c58a-36d2-442e-91e7-603471c64901",
@@ -1253,12 +1303,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-10-19",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788525062444-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.831269"
+      "addedAt": "2026-05-13T11:26:07.831269",
+      "isbn": "9788525062444"
     },
     {
       "id": "4c6e479e-37df-4387-b795-1ab5371ccc6a",
@@ -1283,12 +1334,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-11-23",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788593828096-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.831741"
+      "addedAt": "2026-05-13T11:26:07.831741",
+      "isbn": "9788593828096"
     },
     {
       "id": "e785a796-7bbe-43ce-b17e-aac7ad5a8648",
@@ -1313,7 +1365,7 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
       "endDate": null,
       "coverUrl": null,
@@ -1328,12 +1380,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-01-01",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788580866209-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.832438"
+      "addedAt": "2026-05-13T11:26:07.832438",
+      "isbn": "9788580866209"
     },
     {
       "id": "fb1ae389-c31c-4419-a354-a76be467686d",
@@ -1343,12 +1396,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2024-09-18",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786555951950-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.832680"
+      "addedAt": "2026-05-13T11:26:07.832680",
+      "isbn": "9786555951950"
     },
     {
       "id": "933c3ebd-b919-4d12-9e63-5e7b8890e51f",
@@ -1358,12 +1412,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2023-11-26",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788554515737-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.832919"
+      "addedAt": "2026-05-13T11:26:07.832919",
+      "isbn": "9788554515737"
     },
     {
       "id": "1d2d379b-030d-4afb-8a53-6b9d4b4ee61b",
@@ -1373,12 +1428,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-08-29",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786555606119-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.833133"
+      "addedAt": "2026-05-13T11:26:07.833133",
+      "isbn": "9786555606119"
     },
     {
       "id": "91cfcbad-065d-4cea-9428-48bff7b4d0ef",
@@ -1403,12 +1459,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-02-03",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788554514686-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.833586"
+      "addedAt": "2026-05-13T11:26:07.833586",
+      "isbn": "9788554514686"
     },
     {
       "id": "9750c7e0-863e-40f8-b082-d3714ef3cb96",
@@ -1418,9 +1475,9 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 3,
       "startDate": null,
-      "endDate": null,
+      "endDate": "2025-09-19",
       "coverUrl": null,
       "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.833800"
@@ -1433,12 +1490,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 2,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-04-07",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786558383017-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.834023"
+      "addedAt": "2026-05-13T11:26:07.834023",
+      "isbn": "9786558383017"
     },
     {
       "id": "2c4add75-692c-4c0c-80db-5ad1b236cb4f",
@@ -1463,12 +1521,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-06-01",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786555606614-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.834518"
+      "addedAt": "2026-05-13T11:26:07.834518",
+      "isbn": "9786555606614"
     },
     {
       "id": "9a8ff390-f986-4bac-bfcf-d6c42dfa8032",
@@ -1478,12 +1537,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-02-06",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786555872316-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.834762"
+      "addedAt": "2026-05-13T11:26:07.834762",
+      "isbn": "9786555872316"
     },
     {
       "id": "d267c047-890e-47ff-a219-c0de63d841e3",
@@ -1493,12 +1553,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 4,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2025-02-23",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788501071545-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.834996"
+      "addedAt": "2026-05-13T11:26:07.834996",
+      "isbn": "9788501071545"
     },
     {
       "id": "bf5f7366-515e-4a12-a5bc-92d93042860f",
@@ -1508,12 +1569,13 @@
       "status": "lido",
       "location": "kindle",
       "language": "Português",
-      "rating": null,
+      "rating": 5,
       "startDate": null,
-      "endDate": null,
-      "coverUrl": null,
+      "endDate": "2026-01-19",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788532511669-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.835218"
+      "addedAt": "2026-05-13T11:26:07.835218",
+      "isbn": "9788532511669"
     },
     {
       "id": "fdc6f551-51b0-4e8c-8e44-966b3574ce63",
@@ -1526,9 +1588,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786586490169-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.835341"
+      "addedAt": "2026-05-13T11:26:07.835341",
+      "isbn": "9786586490169"
     },
     {
       "id": "e421223d-5f5a-4274-a3e4-c3a838d57169",
@@ -1676,9 +1739,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9786588218167-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.838387"
+      "addedAt": "2026-05-13T11:26:07.838387",
+      "isbn": "9786588218167"
     },
     {
       "id": "a5993d75-4dee-4a14-827e-080f5bf2def8",
@@ -1796,9 +1860,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788595086258-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.842162"
+      "addedAt": "2026-05-13T11:26:07.842162",
+      "isbn": "9788595086258"
     },
     {
       "id": "c8a2918a-125e-47aa-9f1f-88b1f4588539",
@@ -1856,9 +1921,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788562592638-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.844174"
+      "addedAt": "2026-05-13T11:26:07.844174",
+      "isbn": "9788562592638"
     },
     {
       "id": "353598ef-2ddc-42b3-9cda-3fa8f34527ef",
@@ -1901,9 +1967,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788543106625-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.844937"
+      "addedAt": "2026-05-13T11:26:07.844937",
+      "isbn": "9788543106625"
     },
     {
       "id": "e6c00128-2056-4c94-be90-2c83772da486",
@@ -1991,9 +2058,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780374602635-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.846225"
+      "addedAt": "2026-05-13T11:26:07.846225",
+      "isbn": "9780374602635"
     },
     {
       "id": "a0d88f3b-e650-4846-a8cf-f8557c7d6a35",
@@ -2051,9 +2119,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788579623264-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.847021"
+      "addedAt": "2026-05-13T11:26:07.847021",
+      "isbn": "9788579623264"
     },
     {
       "id": "6f44da27-68fb-48d9-ba66-1f1fdba1e1b3",
@@ -2156,9 +2225,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788579837425-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.848295"
+      "addedAt": "2026-05-13T11:26:07.848295",
+      "isbn": "9788579837425"
     },
     {
       "id": "111c63ea-e0da-468b-b522-af9216b98866",
@@ -2261,9 +2331,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788576571476-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.849555"
+      "addedAt": "2026-05-13T11:26:07.849555",
+      "isbn": "9788576571476"
     },
     {
       "id": "3f347993-a667-4c6d-84cc-3e068d4709ba",
@@ -2291,9 +2362,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788557170094-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.849929"
+      "addedAt": "2026-05-13T11:26:07.849929",
+      "isbn": "9788557170094"
     },
     {
       "id": "5b3dbec5-4618-4ea2-ab3c-0ef04a302156",
@@ -2306,9 +2378,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788506069462-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.850114"
+      "addedAt": "2026-05-13T11:26:07.850114",
+      "isbn": "9788506069462"
     },
     {
       "id": "da18b080-12a8-4d3a-8a5a-ae04768e3ace",
@@ -2351,9 +2424,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788581053059-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.850694"
+      "addedAt": "2026-05-13T11:26:07.850694",
+      "isbn": "9788581053059"
     },
     {
       "id": "5776196c-e1d1-44c1-b80a-758926dd7d60",
@@ -2411,9 +2485,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788551003138-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.851443"
+      "addedAt": "2026-05-13T11:26:07.851443",
+      "isbn": "9788551003138"
     },
     {
       "id": "6d6d540c-9452-4eb3-8f4f-bec28eef67a7",
@@ -2441,9 +2516,10 @@
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "coverUrl": null,
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9788554513245-M.jpg",
       "synopsis": null,
-      "addedAt": "2026-05-13T11:26:07.851816"
+      "addedAt": "2026-05-13T11:26:07.851816",
+      "isbn": "9788554513245"
     },
     {
       "id": "a443ef9d-cf75-43ac-b7b2-f3d33060bc73",
