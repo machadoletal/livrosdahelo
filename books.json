@@ -7,9 +7,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Espanhol",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.801650"
     },
     {
@@ -19,9 +22,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Espanhol",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.801895"
     },
     {
@@ -31,9 +37,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Espanhol",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.802104"
     },
     {
@@ -43,9 +52,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Espanhol",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.802305"
     },
     {
@@ -55,9 +67,12 @@
       "genre": "",
       "status": "lendo",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.802506"
     },
     {
@@ -67,9 +82,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.802699"
     },
     {
@@ -79,9 +97,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.802905"
     },
     {
@@ -91,9 +112,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.803109"
     },
     {
@@ -103,9 +127,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.803311"
     },
     {
@@ -115,22 +142,28 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.803510"
     },
     {
-      "id": "4ba9944d-27e1-4bab-b3b0-1dcf752702ee",
+      "id": "fdc6f551-51b0-4e8c-8e44-966b3574ce63",
       "title": "1984",
       "author": "George Orwell",
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
-      "addedAt": "2026-05-13T11:26:07.803623"
+      "coverUrl": null,
+      "synopsis": null,
+      "addedAt": "2026-05-13T11:26:07.835341"
     },
     {
       "id": "43a269c1-6d9e-4946-9584-c3a6d934daeb",
@@ -139,9 +172,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.803828"
     },
     {
@@ -151,9 +187,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.804028"
     },
     {
@@ -163,9 +202,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.804230"
     },
     {
@@ -175,9 +217,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.804622"
     },
     {
@@ -187,9 +232,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.805135"
     },
     {
@@ -199,9 +247,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.805904"
     },
     {
@@ -211,9 +262,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.806528"
     },
     {
@@ -223,9 +277,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.807047"
     },
     {
@@ -235,9 +292,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.807666"
     },
     {
@@ -247,9 +307,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.808271"
     },
     {
@@ -259,9 +322,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.808788"
     },
     {
@@ -271,9 +337,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.809533"
     },
     {
@@ -283,9 +352,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.810164"
     },
     {
@@ -295,9 +367,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.811055"
     },
     {
@@ -307,9 +382,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.811519"
     },
     {
@@ -319,9 +397,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.811870"
     },
     {
@@ -331,9 +412,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.812202"
     },
     {
@@ -343,9 +427,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.812508"
     },
     {
@@ -355,9 +442,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.812814"
     },
     {
@@ -367,9 +457,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.813108"
     },
     {
@@ -379,9 +472,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.813387"
     },
     {
@@ -391,9 +487,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.813660"
     },
     {
@@ -403,9 +502,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.813946"
     },
     {
@@ -415,9 +517,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.814202"
     },
     {
@@ -427,9 +532,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.814468"
     },
     {
@@ -439,9 +547,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.814719"
     },
     {
@@ -451,9 +562,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.814969"
     },
     {
@@ -463,9 +577,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.815220"
     },
     {
@@ -475,9 +592,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.815473"
     },
     {
@@ -487,9 +607,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.815720"
     },
     {
@@ -499,9 +622,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.815983"
     },
     {
@@ -511,9 +637,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.816241"
     },
     {
@@ -523,9 +652,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.816512"
     },
     {
@@ -535,9 +667,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.816779"
     },
     {
@@ -547,9 +682,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.817045"
     },
     {
@@ -559,9 +697,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.817313"
     },
     {
@@ -571,9 +712,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.817582"
     },
     {
@@ -583,9 +727,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.817847"
     },
     {
@@ -595,9 +742,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.818115"
     },
     {
@@ -607,9 +757,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.818384"
     },
     {
@@ -619,9 +772,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.818653"
     },
     {
@@ -631,9 +787,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.818921"
     },
     {
@@ -643,9 +802,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.819184"
     },
     {
@@ -655,9 +817,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.819451"
     },
     {
@@ -667,9 +832,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.819718"
     },
     {
@@ -679,9 +847,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.819982"
     },
     {
@@ -691,9 +862,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.820250"
     },
     {
@@ -703,9 +877,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.820550"
     },
     {
@@ -715,9 +892,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.820813"
     },
     {
@@ -727,9 +907,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.821086"
     },
     {
@@ -739,9 +922,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.821563"
     },
     {
@@ -751,9 +937,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Inglês",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.822325"
     },
     {
@@ -763,9 +952,12 @@
       "genre": "",
       "status": "lendo",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.822868"
     },
     {
@@ -775,9 +967,12 @@
       "genre": "",
       "status": "lendo",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.823416"
     },
     {
@@ -787,9 +982,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.823993"
     },
     {
@@ -799,9 +997,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.824619"
     },
     {
@@ -811,9 +1012,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.825177"
     },
     {
@@ -823,9 +1027,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.825812"
     },
     {
@@ -835,9 +1042,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.826860"
     },
     {
@@ -847,9 +1057,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.827398"
     },
     {
@@ -859,9 +1072,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.827804"
     },
     {
@@ -871,9 +1087,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.828173"
     },
     {
@@ -883,9 +1102,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.828530"
     },
     {
@@ -895,9 +1117,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.828980"
     },
     {
@@ -907,9 +1132,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.829420"
     },
     {
@@ -919,9 +1147,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.829679"
     },
     {
@@ -931,9 +1162,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.829931"
     },
     {
@@ -943,9 +1177,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.830177"
     },
     {
@@ -955,9 +1192,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.830413"
     },
     {
@@ -967,9 +1207,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.830630"
     },
     {
@@ -979,9 +1222,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.830843"
     },
     {
@@ -991,9 +1237,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.831058"
     },
     {
@@ -1003,9 +1252,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.831269"
     },
     {
@@ -1015,9 +1267,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.831508"
     },
     {
@@ -1027,9 +1282,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.831741"
     },
     {
@@ -1039,9 +1297,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.831988"
     },
     {
@@ -1051,9 +1312,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.832209"
     },
     {
@@ -1063,9 +1327,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.832438"
     },
     {
@@ -1075,9 +1342,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.832680"
     },
     {
@@ -1087,9 +1357,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.832919"
     },
     {
@@ -1099,9 +1372,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.833133"
     },
     {
@@ -1111,9 +1387,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.833367"
     },
     {
@@ -1123,9 +1402,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.833586"
     },
     {
@@ -1135,9 +1417,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.833800"
     },
     {
@@ -1147,9 +1432,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.834023"
     },
     {
@@ -1159,9 +1447,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.834238"
     },
     {
@@ -1171,9 +1462,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.834518"
     },
     {
@@ -1183,9 +1477,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.834762"
     },
     {
@@ -1195,9 +1492,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.834996"
     },
     {
@@ -1207,9 +1507,12 @@
       "genre": "",
       "status": "lido",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.835218"
     },
     {
@@ -1219,9 +1522,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.835341"
     },
     {
@@ -1231,9 +1537,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.835570"
     },
     {
@@ -1243,9 +1552,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.835793"
     },
     {
@@ -1255,9 +1567,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.836023"
     },
     {
@@ -1267,9 +1582,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.836232"
     },
     {
@@ -1279,9 +1597,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.836440"
     },
     {
@@ -1291,9 +1612,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.836717"
     },
     {
@@ -1303,9 +1627,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.837021"
     },
     {
@@ -1315,9 +1642,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.837305"
     },
     {
@@ -1327,9 +1657,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.837588"
     },
     {
@@ -1339,9 +1672,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.838387"
     },
     {
@@ -1351,9 +1687,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.839179"
     },
     {
@@ -1363,9 +1702,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.839726"
     },
     {
@@ -1375,9 +1717,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.840303"
     },
     {
@@ -1387,9 +1732,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.840842"
     },
     {
@@ -1399,9 +1747,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.841243"
     },
     {
@@ -1411,9 +1762,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.841562"
     },
     {
@@ -1423,9 +1777,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.841839"
     },
     {
@@ -1435,9 +1792,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.842162"
     },
     {
@@ -1447,9 +1807,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.842487"
     },
     {
@@ -1459,9 +1822,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.843184"
     },
     {
@@ -1471,9 +1837,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.843795"
     },
     {
@@ -1483,9 +1852,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.844174"
     },
     {
@@ -1495,9 +1867,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.844447"
     },
     {
@@ -1507,9 +1882,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.844683"
     },
     {
@@ -1519,9 +1897,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.844937"
     },
     {
@@ -1531,9 +1912,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.845158"
     },
     {
@@ -1543,9 +1927,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.845377"
     },
     {
@@ -1555,9 +1942,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.845598"
     },
     {
@@ -1567,9 +1957,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.845813"
     },
     {
@@ -1579,9 +1972,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.846030"
     },
     {
@@ -1591,9 +1987,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.846225"
     },
     {
@@ -1603,9 +2002,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.846422"
     },
     {
@@ -1615,9 +2017,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.846620"
     },
     {
@@ -1627,9 +2032,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.846817"
     },
     {
@@ -1639,9 +2047,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847021"
     },
     {
@@ -1651,9 +2062,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847204"
     },
     {
@@ -1663,9 +2077,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847384"
     },
     {
@@ -1675,9 +2092,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847569"
     },
     {
@@ -1687,9 +2107,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847751"
     },
     {
@@ -1699,9 +2122,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.847932"
     },
     {
@@ -1711,9 +2137,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.848112"
     },
     {
@@ -1723,9 +2152,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.848295"
     },
     {
@@ -1735,9 +2167,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.848475"
     },
     {
@@ -1747,9 +2182,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.848657"
     },
     {
@@ -1759,9 +2197,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.848835"
     },
     {
@@ -1771,9 +2212,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849014"
     },
     {
@@ -1783,9 +2227,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849192"
     },
     {
@@ -1795,9 +2242,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849372"
     },
     {
@@ -1807,9 +2257,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849555"
     },
     {
@@ -1819,9 +2272,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849733"
     },
     {
@@ -1831,9 +2287,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.849929"
     },
     {
@@ -1843,9 +2302,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.850114"
     },
     {
@@ -1855,9 +2317,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.850299"
     },
     {
@@ -1867,9 +2332,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.850482"
     },
     {
@@ -1879,9 +2347,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.850694"
     },
     {
@@ -1891,9 +2362,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.850883"
     },
     {
@@ -1903,9 +2377,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.851072"
     },
     {
@@ -1915,9 +2392,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.851257"
     },
     {
@@ -1927,9 +2407,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.851443"
     },
     {
@@ -1939,9 +2422,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.851632"
     },
     {
@@ -1951,9 +2437,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.851816"
     },
     {
@@ -1963,9 +2452,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.852002"
     },
     {
@@ -1975,9 +2467,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.852186"
     },
     {
@@ -1987,9 +2482,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.852371"
     },
     {
@@ -1999,9 +2497,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.852632"
     },
     {
@@ -2011,9 +2512,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.852874"
     },
     {
@@ -2023,9 +2527,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.853087"
     },
     {
@@ -2035,9 +2542,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.853294"
     },
     {
@@ -2047,9 +2557,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.853506"
     },
     {
@@ -2059,9 +2572,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.853716"
     },
     {
@@ -2071,9 +2587,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.853924"
     },
     {
@@ -2083,9 +2602,12 @@
       "genre": "",
       "status": "vou_ler",
       "location": "kindle",
+      "language": "Português",
       "rating": null,
       "startDate": null,
       "endDate": null,
+      "coverUrl": null,
+      "synopsis": null,
       "addedAt": "2026-05-13T11:26:07.854136"
     }
   ]
