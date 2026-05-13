@@ -683,6 +683,8 @@
   <div id="statusFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
   <div class="filter-sep"></div>
   <div id="locFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <div class="filter-sep"></div>
+  <div id="langFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
   <div class="search-wrap">
     <input class="search" id="searchInput" type="text" placeholder="🔍 Buscar..." oninput="render()">
   </div>
@@ -799,13 +801,28 @@
           </div>
         </div>
 
-        <div class="fg">
-          <label>Localização</label>
-          <select id="fLocation">
-            <option value="precisa_baixar">⬇ Preciso Baixar</option>
-            <option value="kindle">📱 Kindle</option>
-            <option value="fisico">📗 Livro Físico</option>
-          </select>
+        <div class="fg2">
+          <div class="fg" style="margin:0">
+            <label>Localização</label>
+            <select id="fLocation">
+              <option value="precisa_baixar">⬇ Preciso Baixar</option>
+              <option value="kindle">📱 Kindle</option>
+              <option value="fisico">📗 Livro Físico</option>
+            </select>
+          </div>
+          <div class="fg" style="margin:0">
+            <label>Idioma</label>
+            <select id="fLanguage">
+              <option value="">Selecionar...</option>
+              <option value="Português">🇧🇷 Português</option>
+              <option value="Inglês">🇬🇧 Inglês</option>
+              <option value="Espanhol">🇪🇸 Espanhol</option>
+              <option value="Francês">🇫🇷 Francês</option>
+              <option value="Alemão">🇩🇪 Alemão</option>
+              <option value="Italiano">🇮🇹 Italiano</option>
+              <option value="Japonês">🇯🇵 Japonês</option>
+            </select>
+          </div>
         </div>
 
         <div class="fg">
@@ -889,7 +906,8 @@ let books = [];
 let rating = 0;
 let editId = null;
 let filterStatus = 'all';
-let filterLoc = 'all';
+let filterLoc    = 'all';
+let filterLang   = 'all';
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 const cfg = () => ({
@@ -1058,11 +1076,20 @@ function renderFilters() {
   document.getElementById('locFilters').innerHTML = locs.map(([k,l]) =>
     `<button class="fb ${filterLoc===k?'active':''}" onclick="setFilter('l','${k}')">${l}</button>`
   ).join('');
+
+  // Language filters — built dynamically from book data
+  const LANG_FLAG = { 'Português':'🇧🇷','Inglês':'🇬🇧','Espanhol':'🇪🇸','Francês':'🇫🇷','Alemão':'🇩🇪','Italiano':'🇮🇹','Japonês':'🇯🇵' };
+  const langs = ['all', ...Array.from(new Set(books.map(b => b.language).filter(Boolean))).sort()];
+  document.getElementById('langFilters').innerHTML = langs.map(k => {
+    const label = k === 'all' ? '🌐 Todos' : `${LANG_FLAG[k]||'🌐'} ${k}`;
+    return `<button class="fb ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}')">${label}</button>`;
+  }).join('');
 }
 
 function setFilter(type, val) {
-  if (type === 's') filterStatus = val;
-  else filterLoc = val;
+  if (type === 's')    filterStatus = val;
+  if (type === 'l')    filterLoc    = val;
+  if (type === 'lang') filterLang   = val;
   renderFilters();
   render();
 }
@@ -1071,12 +1098,14 @@ function render() {
   const q = document.getElementById('searchInput').value.toLowerCase();
 
   let list = books.filter(b => {
-    const okS = filterStatus === 'all' || b.status === filterStatus;
-    const okL = filterLoc === 'all' || b.location === filterLoc;
+    const okS    = filterStatus === 'all' || b.status   === filterStatus;
+    const okL    = filterLoc   === 'all' || b.location  === filterLoc;
+    const okLang = filterLang  === 'all' || b.language  === filterLang;
     const okQ = !q || b.title.toLowerCase().includes(q) ||
                 b.author.toLowerCase().includes(q) ||
-                (b.genre||'').toLowerCase().includes(q);
-    return okS && okL && okQ;
+                (b.genre||'').toLowerCase().includes(q) ||
+                (b.language||'').toLowerCase().includes(q);
+    return okS && okL && okLang && okQ;
   });
 
   list.sort((a,b) => {
@@ -1356,10 +1385,11 @@ async function openDetail(id) {
   }
 
   // Badges
-  const locBadge = b.location
-    ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '';
+  const locBadge  = b.location ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '';
+  const LANG_FLAG = { 'Português':'🇧🇷','Inglês':'🇬🇧','Espanhol':'🇪🇸','Francês':'🇫🇷','Alemão':'🇩🇪','Italiano':'🇮🇹','Japonês':'🇯🇵' };
+  const langBadge = b.language ? `<span class="badge" style="background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border)">${LANG_FLAG[b.language]||'🌐'} ${b.language}</span>` : '';
   document.getElementById('dBadges').innerHTML =
-    `<span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>${locBadge}`;
+    `<span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>${locBadge}${langBadge}`;
 
   // Stars
   document.getElementById('dStars').innerHTML = b.rating
@@ -1419,7 +1449,8 @@ function openAdd(prefill = {}) {
   document.getElementById('fAuthor').value  = prefill.author   || '';
   document.getElementById('fGenre').value   = prefill.genre    || '';
   document.getElementById('fStatus').value  = prefill.status   || 'vou_ler';
-  document.getElementById('fLocation').value = prefill.location || 'precisa_baixar';
+  document.getElementById('fLocation').value  = prefill.location || 'precisa_baixar';
+  document.getElementById('fLanguage').value  = prefill.language || '';
   document.getElementById('bookModal').dataset.coverUrl = prefill.coverUrl || '';
   updateStars(0);
   document.getElementById('bookModal').classList.remove('hidden');
@@ -1436,9 +1467,10 @@ function openEdit(id) {
   document.getElementById('fAuthor').value  = b.author || '';
   document.getElementById('fGenre').value   = b.genre || '';
   document.getElementById('fStatus').value  = b.status || 'vou_ler';
-  document.getElementById('fLocation').value = b.location || 'precisa_baixar';
-  document.getElementById('fStart').value   = b.startDate || '';
-  document.getElementById('fEnd').value     = b.endDate || '';
+  document.getElementById('fLocation').value  = b.location || 'precisa_baixar';
+  document.getElementById('fLanguage').value  = b.language || '';
+  document.getElementById('fStart').value    = b.startDate || '';
+  document.getElementById('fEnd').value      = b.endDate || '';
   updateStars(rating);
   document.getElementById('bookModal').classList.remove('hidden');
 }
@@ -1463,6 +1495,7 @@ async function submitBook(e) {
     genre:     document.getElementById('fGenre').value,
     status:    document.getElementById('fStatus').value,
     location:  document.getElementById('fLocation').value,
+    language:  document.getElementById('fLanguage').value,
     rating:    rating || null,
     startDate: document.getElementById('fStart').value || null,
     endDate:   document.getElementById('fEnd').value   || null,
