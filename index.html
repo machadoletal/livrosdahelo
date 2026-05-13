@@ -251,23 +251,19 @@
     .card:hover .card-del { opacity: 1; }
     .card-del:hover { border-color: #f87171; }
 
-    /* Info below cover — altura fixa: título(2L) + autor + estrelas + padding */
+    /* Info below cover */
     .card-info {
-      padding: 9px 10px 10px;
+      padding: 9px 10px 11px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      height: 80px;
-      overflow: hidden;
+      gap: 3px;
       flex-shrink: 0;
     }
 
     .card-title {
       font-size: 0.8rem;
       font-weight: 700;
-      line-height: 1.3;
-      /* Sempre exatamente 2 linhas — garante altura uniforme entre cards */
-      height: calc(0.8rem * 1.3 * 2);
+      line-height: 1.35;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -281,8 +277,8 @@
       text-overflow: ellipsis;
     }
 
-    .stars { display: flex; gap: 2px; margin-top: 5px; }
-    .star  { font-size: 0.72rem; color: var(--accent); }
+    .stars { display: flex; gap: 2px; margin-top: 4px; }
+    .star  { font-size: 0.7rem; color: var(--accent); }
     .star.empty { color: var(--surface-3); }
 
     /* ── No-ISBN badge ── */
