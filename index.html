@@ -719,6 +719,23 @@ const lsSave = (b) => localStorage.setItem('books', JSON.stringify(b));
 async function init() {
   checkSetupBanner();
   showLoading();
+
+  // Sempre busca o books.json ao vivo do GitHub Pages (funciona em qualquer dispositivo)
+  // O ?t= evita cache do browser para garantir dados sempre atualizados
+  try {
+    const r = await fetch('./books.json?t=' + Date.now());
+    if (r.ok) {
+      const data = await r.json();
+      books = data.books || [];
+      lsSave(books);
+      renderStats();
+      renderFilters();
+      render();
+      return;
+    }
+  } catch(e) {}
+
+  // Fallback: GitHub API (quando rodando localmente sem servidor)
   const c = cfg();
   if (c.owner && c.repo) {
     const res = await ghFetch();
