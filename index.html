@@ -1096,6 +1096,7 @@ function render() {
 
   document.getElementById('booksGrid').innerHTML =
     `<div class="books-grid">${list.map(card).join('')}</div>`;
+  observeCovers();
 }
 
 function card(b) {
@@ -1110,9 +1111,7 @@ function card(b) {
     ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>`
     : '';
 
-  // Cover: stored URL → Open Library by title → placeholder
-  const coverSrc = b.coverUrl ||
-    `https://covers.openlibrary.org/b/title/${encodeURIComponent(b.title)}-M.jpg`;
+  const hasCover = !!b.coverUrl;
 
   return `
     <div class="card status-${b.status} ${locClass}" onclick="openDetail('${b.id}')">
@@ -1120,12 +1119,15 @@ function card(b) {
       <div class="card-cover-wrap">
         <img
           class="card-cover"
-          src="${coverSrc}"
+          ${hasCover ? `src="${b.coverUrl}"` : ''}
+          data-bid="${b.id}"
+          data-title="${b.title.replace(/"/g,'&quot;')}"
+          data-author="${(b.author||'').replace(/"/g,'&quot;')}"
           alt=""
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           loading="lazy"
         >
-        <div class="card-cover-ph" style="display:none">${GENRE_ICON[b.genre]||'📚'}</div>
+        <div class="card-cover-ph" style="${hasCover ? 'display:none' : 'display:flex'}">${GENRE_ICON[b.genre]||'📚'}</div>
 
         <div class="card-overlay">
           <span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>
@@ -1146,6 +1148,54 @@ function card(b) {
 
 const fmt = d => { if(!d) return ''; const [y,m,day] = d.split('-'); return `${day}/${m}/${y}`; };
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+// ── Cover lazy loading ─────────────────────────────────────────────────────────
+async function fetchCoverUrl(title, author) {
+  try {
+    const params = new URLSearchParams({ limit: '1', fields: 'cover_i' });
+    if (title)  params.set('title', title);
+    if (author) params.set('author', author);
+    const r = await fetch(`https://openlibrary.org/search.json?${params}`);
+    const d = await r.json();
+    const covId = d.docs?.[0]?.cover_i;
+    return covId ? `https://covers.openlibrary.org/b/id/${covId}-M.jpg` : null;
+  } catch { return null; }
+}
+
+let coverSaveTimer;
+function scheduleCoverSave() {
+  clearTimeout(coverSaveTimer);
+  coverSaveTimer = setTimeout(async () => {
+    lsSave(books);
+    const c = cfg();
+    if (c.owner && c.repo && c.token) await ghSave(books);
+  }, 4000);
+}
+
+function observeCovers() {
+  const imgs = document.querySelectorAll('.card-cover:not([src])');
+  if (!imgs.length) return;
+
+  const observer = new IntersectionObserver(async (entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const img = entry.target;
+      observer.unobserve(img);
+
+      const url = await fetchCoverUrl(img.dataset.title, img.dataset.author);
+      if (!url) continue;
+
+      img.src = url;
+      const ph = img.nextElementSibling;
+      if (ph) ph.style.display = 'none';
+
+      const idx = books.findIndex(b => b.id === img.dataset.bid);
+      if (idx >= 0) { books[idx].coverUrl = url; scheduleCoverSave(); }
+    }
+  }, { rootMargin: '200px' });
+
+  imgs.forEach(img => observer.observe(img));
+}
 
 // ── Quick-add: parse natural language ─────────────────────────────────────────
 function parseQuickAdd(input) {
@@ -1284,14 +1334,26 @@ async function openDetail(id) {
   document.getElementById('dAuthor').textContent    = b.author;
 
   // Cover
-  const coverSrc = b.coverUrl ||
-    `https://covers.openlibrary.org/b/title/${encodeURIComponent(b.title)}-M.jpg`;
   const img = document.getElementById('dCover');
   const ph  = document.getElementById('dCoverPh');
-  img.style.display = 'block';
-  ph.style.display  = 'none';
-  ph.textContent    = GENRE_ICON[b.genre] || '📚';
-  img.src           = coverSrc;
+  ph.textContent = GENRE_ICON[b.genre] || '📚';
+  if (b.coverUrl) {
+    img.style.display = 'block';
+    ph.style.display  = 'none';
+    img.src = b.coverUrl;
+  } else {
+    img.style.display = 'none';
+    ph.style.display  = 'flex';
+    // Fetch with title + author
+    fetchCoverUrl(b.title, b.author).then(url => {
+      if (!url) return;
+      img.src = url;
+      img.style.display = 'block';
+      ph.style.display  = 'none';
+      const idx = books.findIndex(x => x.id === b.id);
+      if (idx >= 0) { books[idx].coverUrl = url; scheduleCoverSave(); }
+    });
+  }
 
   // Badges
   const locBadge = b.location
