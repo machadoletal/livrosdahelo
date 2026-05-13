@@ -564,7 +564,7 @@
   <div class="modal">
     <div class="modal-head">
       <h2 id="modalTitle">Adicionar Livro</h2>
-      <button class="x-btn" onclick="close('bookModal')">✕</button>
+      <button class="x-btn" onclick="closeModal('bookModal')">✕</button>
     </div>
     <div class="modal-body">
       <form id="bookForm" onsubmit="submitBook(event)">
@@ -643,7 +643,7 @@
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn btn-ghost" onclick="close('bookModal')">Cancelar</button>
+          <button type="button" class="btn btn-ghost" onclick="closeModal('bookModal')">Cancelar</button>
           <button type="submit" class="btn btn-primary">💾 Salvar</button>
         </div>
       </form>
@@ -656,7 +656,7 @@
   <div class="modal">
     <div class="modal-head">
       <h2>⚙ Configurar GitHub</h2>
-      <button class="x-btn" onclick="close('configModal')">✕</button>
+      <button class="x-btn" onclick="closeModal('configModal')">✕</button>
     </div>
     <div class="modal-body">
       <div class="info-box">
@@ -686,7 +686,7 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="btn btn-ghost" onclick="close('configModal')">Cancelar</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal('configModal')">Cancelar</button>
         <button type="button" class="btn btn-primary" onclick="saveConfig()">💾 Salvar</button>
       </div>
     </div>
@@ -725,7 +725,7 @@ function saveConfig() {
   localStorage.setItem('gh_repo',   document.getElementById('cfgRepo').value.trim());
   localStorage.setItem('gh_branch', document.getElementById('cfgBranch').value.trim() || 'main');
   localStorage.setItem('gh_token',  document.getElementById('cfgToken').value.trim());
-  close('configModal');
+  closeModal('configModal');
   checkSetupBanner();
   toast('Configuração salva!', 'ok');
 }
@@ -1102,7 +1102,7 @@ function openEdit(id) {
   document.getElementById('bookModal').classList.remove('hidden');
 }
 
-function close(id) { document.getElementById(id).classList.add('hidden'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
 function setRating(v) { rating = v; updateStars(v); }
 function updateStars(v) {
@@ -1133,7 +1133,7 @@ async function submitBook(e) {
     ? books.map(b => b.id === editId ? book : b)
     : [...books, book];
 
-  close('bookModal');
+  closeModal('bookModal');
   lsSave(books);
   renderStats();
   renderFilters();
@@ -1175,7 +1175,7 @@ function toast(msg, type) {
 
 // ── Close on backdrop ──────────────────────────────────────────────────────────
 document.querySelectorAll('.overlay').forEach(o =>
-  o.addEventListener('click', e => { if (e.target === o) o.classList.add('hidden'); })
+  o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); })
 );
 
 // ── Go ─────────────────────────────────────────────────────────────────────────
