@@ -277,6 +277,125 @@
     .star  { font-size: 0.75rem; color: var(--accent); }
     .star.empty { color: var(--border); }
 
+    /* ── Detail Modal ── */
+    .detail-modal {
+      max-width: 680px;
+    }
+
+    .detail-body {
+      padding: 22px 26px 28px;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 24px;
+    }
+
+    .detail-cover {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .detail-cover-ph {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      background: var(--surface-2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .detail-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .detail-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .detail-author {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: -6px;
+    }
+
+    .detail-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .detail-badges .badge {
+      font-size: 0.68rem;
+      padding: 3px 10px;
+    }
+
+    .detail-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .detail-synopsis-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      flex: 1;
+    }
+
+    .detail-synopsis-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .detail-synopsis {
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: var(--text);
+      max-height: 180px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .synopsis-loading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .detail-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .detail-body {
+        grid-template-columns: 1fr;
+      }
+      .detail-cover, .detail-cover-ph {
+        max-width: 140px;
+        margin: 0 auto;
+      }
+    }
+
     /* ── Empty ── */
     .empty {
       grid-column: 1/-1;
@@ -587,6 +706,44 @@
     <button class="quick-send" id="quickSendBtn" onclick="submitQuickAdd()" title="Adicionar livro">
       <span id="quickSendIcon">↵</span>
     </button>
+  </div>
+</div>
+
+<!-- ── Detail Modal ── -->
+<div class="overlay hidden" id="detailModal">
+  <div class="modal detail-modal">
+    <div class="modal-head">
+      <h2 id="dTitle" style="font-size:1rem;line-height:1.3"></h2>
+      <button class="x-btn" onclick="closeModal('detailModal')">✕</button>
+    </div>
+    <div class="detail-body">
+
+      <div class="detail-cover-col">
+        <img id="dCover" class="detail-cover" src="" alt=""
+          onerror="this.style.display='none';document.getElementById('dCoverPh').style.display='flex'">
+        <div id="dCoverPh" class="detail-cover-ph" style="display:none">📚</div>
+      </div>
+
+      <div class="detail-right">
+        <div>
+          <div class="detail-title" id="dTitleMain"></div>
+          <div class="detail-author" id="dAuthor"></div>
+        </div>
+        <div class="detail-badges" id="dBadges"></div>
+        <div class="stars" id="dStars"></div>
+        <div class="detail-meta" id="dMeta"></div>
+
+        <div class="detail-synopsis-wrap">
+          <div class="detail-synopsis-label">Sinopse</div>
+          <div class="detail-synopsis" id="dSynopsis"></div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn btn-primary" onclick="openEditFromDetail()">✏️ Editar</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -958,7 +1115,7 @@ function card(b) {
     `https://covers.openlibrary.org/b/title/${encodeURIComponent(b.title)}-M.jpg`;
 
   return `
-    <div class="card status-${b.status} ${locClass}" onclick="openEdit('${b.id}')">
+    <div class="card status-${b.status} ${locClass}" onclick="openDetail('${b.id}')">
 
       <div class="card-cover-wrap">
         <img
@@ -1111,6 +1268,82 @@ async function submitQuickAdd() {
   document.getElementById('quickInput').value = '';
 
   if (!found) toast('Livro não encontrado na API — confira os dados', 'inf');
+}
+
+// ── Detail Modal ──────────────────────────────────────────────────────────────
+let detailBookId = null;
+
+async function openDetail(id) {
+  const b = books.find(x => x.id === id);
+  if (!b) return;
+  detailBookId = id;
+
+  // Header + title/author
+  document.getElementById('dTitle').textContent     = b.title;
+  document.getElementById('dTitleMain').textContent = b.title;
+  document.getElementById('dAuthor').textContent    = b.author;
+
+  // Cover
+  const coverSrc = b.coverUrl ||
+    `https://covers.openlibrary.org/b/title/${encodeURIComponent(b.title)}-M.jpg`;
+  const img = document.getElementById('dCover');
+  const ph  = document.getElementById('dCoverPh');
+  img.style.display = 'block';
+  ph.style.display  = 'none';
+  ph.textContent    = GENRE_ICON[b.genre] || '📚';
+  img.src           = coverSrc;
+
+  // Badges
+  const locBadge = b.location
+    ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '';
+  document.getElementById('dBadges').innerHTML =
+    `<span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>${locBadge}`;
+
+  // Stars
+  document.getElementById('dStars').innerHTML = b.rating
+    ? [1,2,3,4,5].map(i =>
+        `<span class="star ${i <= b.rating ? '' : 'empty'}">★</span>`
+      ).join('') : '';
+
+  // Dates
+  const meta = [];
+  if (b.startDate) meta.push(`Início: ${fmt(b.startDate)}`);
+  if (b.endDate)   meta.push(`Fim: ${fmt(b.endDate)}`);
+  document.getElementById('dMeta').textContent = meta.join('  ·  ');
+
+  // Synopsis
+  const synEl = document.getElementById('dSynopsis');
+  if (b.synopsis) {
+    synEl.textContent = b.synopsis;
+  } else {
+    synEl.innerHTML =
+      '<span class="synopsis-loading"><span class="spin" style="width:14px;height:14px;border-width:2px;margin:0;display:inline-block;vertical-align:middle"></span> &nbsp;Buscando sinopse...</span>';
+    const syn = await fetchSynopsis(b.title, b.author);
+    const clean = syn ? syn.replace(/<[^>]*>/g, '') : 'Sinopse não encontrada.';
+    synEl.textContent = clean;
+    if (syn) {
+      const idx = books.findIndex(x => x.id === id);
+      if (idx >= 0) { books[idx].synopsis = clean; lsSave(books); }
+    }
+  }
+
+  document.getElementById('detailModal').classList.remove('hidden');
+}
+
+async function fetchSynopsis(title, author) {
+  try {
+    const q = author ? `${title} ${author}` : title;
+    const r = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=1`
+    );
+    const d = await r.json();
+    return d.items?.[0]?.volumeInfo?.description || null;
+  } catch { return null; }
+}
+
+function openEditFromDetail() {
+  closeModal('detailModal');
+  openEdit(detailBookId);
 }
 
 // ── Modal ──────────────────────────────────────────────────────────────────────
