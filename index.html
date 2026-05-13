@@ -1150,6 +1150,7 @@ function card(b) {
           class="card-cover"
           ${hasCover ? `src="${b.coverUrl}"` : ''}
           data-bid="${b.id}"
+          data-isbn="${b.isbn||''}"
           data-title="${b.title.replace(/"/g,'&quot;')}"
           data-author="${(b.author||'').replace(/"/g,'&quot;')}"
           alt=""
@@ -1211,7 +1212,11 @@ function observeCovers() {
       const img = entry.target;
       observer.unobserve(img);
 
-      const url = await fetchCoverUrl(img.dataset.title, img.dataset.author);
+      // ISBN → cover direto (sem API call); fallback: busca por título+autor
+      const isbn = img.dataset.isbn;
+      const url  = isbn
+        ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`
+        : await fetchCoverUrl(img.dataset.title, img.dataset.author);
       if (!url) continue;
 
       img.src = url;
@@ -1307,12 +1312,18 @@ async function searchGoogleBooks(query) {
     const data = await r.json();
     if (!data.items?.length) return null;
     const v = data.items[0].volumeInfo;
-    const thumb = v.imageLinks?.thumbnail || v.imageLinks?.smallThumbnail || null;
+    const thumb  = v.imageLinks?.thumbnail || v.imageLinks?.smallThumbnail || null;
+    const ids    = v.industryIdentifiers || [];
+    const isbn13 = ids.find(x => x.type === 'ISBN_13')?.identifier || '';
+    const isbn10 = ids.find(x => x.type === 'ISBN_10')?.identifier || '';
     return {
       title:    v.title || '',
       author:   (v.authors || []).join(', '),
       genre:    mapGenre(v.categories),
-      coverUrl: thumb ? thumb.replace('http://', 'https://') : null,
+      isbn:     isbn13 || isbn10 || null,
+      coverUrl: isbn13
+        ? `https://covers.openlibrary.org/b/isbn/${isbn13}-M.jpg`
+        : thumb ? thumb.replace('http://', 'https://') : null,
     };
   } catch { return null; }
 }
@@ -1451,6 +1462,7 @@ function openAdd(prefill = {}) {
   document.getElementById('fStatus').value  = prefill.status   || 'vou_ler';
   document.getElementById('fLocation').value  = prefill.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = prefill.language || '';
+  document.getElementById('bookModal').dataset.isbn     = prefill.isbn     || '';
   document.getElementById('bookModal').dataset.coverUrl = prefill.coverUrl || '';
   updateStars(0);
   document.getElementById('bookModal').classList.remove('hidden');
@@ -1499,6 +1511,7 @@ async function submitBook(e) {
     rating:    rating || null,
     startDate: document.getElementById('fStart').value || null,
     endDate:   document.getElementById('fEnd').value   || null,
+    isbn:      document.getElementById('bookModal').dataset.isbn     || existing?.isbn     || null,
     coverUrl:  document.getElementById('bookModal').dataset.coverUrl || existing?.coverUrl || null,
     addedAt:   editId
       ? (existing?.addedAt || new Date().toISOString())
