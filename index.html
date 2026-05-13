@@ -277,6 +277,22 @@
     .star  { font-size: 0.75rem; color: var(--accent); }
     .star.empty { color: var(--border); }
 
+    /* ── No-ISBN badge ── */
+    .no-isbn {
+      position: absolute;
+      bottom: 7px; right: 7px;
+      background: rgba(251,146,60,0.92);
+      color: #111;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
     /* ── Detail Modal ── */
     .detail-modal {
       max-width: 680px;
@@ -685,6 +701,8 @@
   <div id="locFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
   <div class="filter-sep"></div>
   <div id="langFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <div class="filter-sep"></div>
+  <div id="noIsbnFilter"></div>
   <div class="search-wrap">
     <input class="search" id="searchInput" type="text" placeholder="🔍 Buscar..." oninput="render()">
   </div>
@@ -826,6 +844,11 @@
         </div>
 
         <div class="fg">
+          <label>ISBN</label>
+          <input type="text" id="fIsbn" placeholder="ex: 9788501028723">
+        </div>
+
+        <div class="fg">
           <label>Minha Nota</label>
           <div class="star-row" id="starRow">
             <button type="button" class="s-btn" data-v="1" onclick="setRating(1)">★</button>
@@ -905,9 +928,10 @@
 let books = [];
 let rating = 0;
 let editId = null;
-let filterStatus = 'all';
-let filterLoc    = 'all';
-let filterLang   = 'all';
+let filterStatus  = 'all';
+let filterLoc     = 'all';
+let filterLang    = 'all';
+let filterNoIsbn  = false;
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 const cfg = () => ({
@@ -1084,12 +1108,17 @@ function renderFilters() {
     const label = k === 'all' ? '🌐 Todos' : `${LANG_FLAG[k]||'🌐'} ${k}`;
     return `<button class="fb ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}')">${label}</button>`;
   }).join('');
+
+  const noIsbnCount = books.filter(b => !b.isbn).length;
+  document.getElementById('noIsbnFilter').innerHTML =
+    `<button class="fb ${filterNoIsbn?'active':''}" onclick="setFilter('noisbn','')">⚠ Sem ISBN (${noIsbnCount})</button>`;
 }
 
 function setFilter(type, val) {
-  if (type === 's')    filterStatus = val;
-  if (type === 'l')    filterLoc    = val;
-  if (type === 'lang') filterLang   = val;
+  if (type === 's')      filterStatus = val;
+  if (type === 'l')      filterLoc    = val;
+  if (type === 'lang')   filterLang   = val;
+  if (type === 'noisbn') filterNoIsbn = !filterNoIsbn;
   renderFilters();
   render();
 }
@@ -1101,11 +1130,12 @@ function render() {
     const okS    = filterStatus === 'all' || b.status   === filterStatus;
     const okL    = filterLoc   === 'all' || b.location  === filterLoc;
     const okLang = filterLang  === 'all' || b.language  === filterLang;
+    const okIsbn = !filterNoIsbn || !b.isbn;
     const okQ = !q || b.title.toLowerCase().includes(q) ||
                 b.author.toLowerCase().includes(q) ||
                 (b.genre||'').toLowerCase().includes(q) ||
                 (b.language||'').toLowerCase().includes(q);
-    return okS && okL && okLang && okQ;
+    return okS && okL && okLang && okIsbn && okQ;
   });
 
   list.sort((a,b) => {
@@ -1165,6 +1195,7 @@ function card(b) {
         </div>
 
         <button class="card-del" onclick="event.stopPropagation();del('${b.id}')">🗑</button>
+        ${!b.isbn ? '<span class="no-isbn">Sem ISBN</span>' : ''}
       </div>
 
       <div class="card-info">
@@ -1408,10 +1439,12 @@ async function openDetail(id) {
         `<span class="star ${i <= b.rating ? '' : 'empty'}">★</span>`
       ).join('') : '';
 
-  // Dates
+  // Dates + ISBN
   const meta = [];
   if (b.startDate) meta.push(`Início: ${fmt(b.startDate)}`);
   if (b.endDate)   meta.push(`Fim: ${fmt(b.endDate)}`);
+  if (b.isbn)      meta.push(`ISBN: ${b.isbn}`);
+  else             meta.push('⚠ Sem ISBN');
   document.getElementById('dMeta').textContent = meta.join('  ·  ');
 
   // Synopsis
@@ -1475,6 +1508,7 @@ function openAdd(prefill = {}) {
   document.getElementById('fStatus').value  = prefill.status   || 'vou_ler';
   document.getElementById('fLocation').value  = prefill.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = prefill.language || '';
+  document.getElementById('fIsbn').value = prefill.isbn || '';
   document.getElementById('bookModal').dataset.isbn     = prefill.isbn     || '';
   document.getElementById('bookModal').dataset.coverUrl = prefill.coverUrl || '';
   updateStars(0);
@@ -1494,6 +1528,7 @@ function openEdit(id) {
   document.getElementById('fStatus').value  = b.status || 'vou_ler';
   document.getElementById('fLocation').value  = b.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = b.language || '';
+  document.getElementById('fIsbn').value      = b.isbn     || '';
   document.getElementById('fStart').value    = b.startDate || '';
   document.getElementById('fEnd').value      = b.endDate || '';
   updateStars(rating);
@@ -1524,12 +1559,17 @@ async function submitBook(e) {
     rating:    rating || null,
     startDate: document.getElementById('fStart').value || null,
     endDate:   document.getElementById('fEnd').value   || null,
-    isbn:      document.getElementById('bookModal').dataset.isbn     || existing?.isbn     || null,
+    isbn:      document.getElementById('fIsbn').value.trim()          || existing?.isbn     || null,
     coverUrl:  document.getElementById('bookModal').dataset.coverUrl || existing?.coverUrl || null,
     addedAt:   editId
       ? (existing?.addedAt || new Date().toISOString())
       : new Date().toISOString(),
   };
+
+  // Se ISBN foi adicionado/alterado e não há capa ainda, gera URL da capa pelo ISBN
+  if (book.isbn && !book.coverUrl) {
+    book.coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
+  }
 
   books = editId
     ? books.map(b => b.id === editId ? book : b)
