@@ -1421,19 +1421,32 @@ async function openDetail(id) {
   } else {
     synEl.innerHTML =
       '<span class="synopsis-loading"><span class="spin" style="width:14px;height:14px;border-width:2px;margin:0;display:inline-block;vertical-align:middle"></span> &nbsp;Buscando sinopse...</span>';
-    const syn = await fetchSynopsis(b.title, b.author);
+    const syn = await fetchSynopsis(b.isbn, b.title, b.author);
     const clean = syn ? syn.replace(/<[^>]*>/g, '') : 'Sinopse não encontrada.';
     synEl.textContent = clean;
     if (syn) {
       const idx = books.findIndex(x => x.id === id);
-      if (idx >= 0) { books[idx].synopsis = clean; lsSave(books); }
+      if (idx >= 0) { books[idx].synopsis = clean; scheduleCoverSave(); }
     }
   }
 
   document.getElementById('detailModal').classList.remove('hidden');
 }
 
-async function fetchSynopsis(title, author) {
+async function fetchSynopsis(isbn, title, author) {
+  // 1. Busca por ISBN (mais preciso — identifica a edição exata)
+  if (isbn) {
+    try {
+      const r = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&maxResults=1`
+      );
+      const d = await r.json();
+      const desc = d.items?.[0]?.volumeInfo?.description;
+      if (desc) return desc;
+    } catch {}
+  }
+
+  // 2. Fallback: busca por título + autor
   try {
     const q = author ? `${title} ${author}` : title;
     const r = await fetch(
