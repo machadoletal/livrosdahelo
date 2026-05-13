@@ -158,6 +158,8 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      align-self: start; /* não estica na grid row */
+      width: 100%;
     }
 
     .card:hover {
@@ -249,12 +251,15 @@
     .card:hover .card-del { opacity: 1; }
     .card-del:hover { border-color: #f87171; }
 
-    /* Info below cover */
+    /* Info below cover — altura fixa: título(2L) + autor + estrelas + padding */
     .card-info {
-      padding: 9px 10px 12px;
+      padding: 9px 10px 10px;
       display: flex;
       flex-direction: column;
       gap: 2px;
+      height: 80px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .card-title {
