@@ -721,6 +721,107 @@
       text-decoration: underline;
     }
 
+    /* ── Reading progress bar (on card) ── */
+    .progress-wrap {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .progress-bar {
+      height: 4px;
+      background: var(--surface-3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--lendo);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .progress-label {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Quick-add preview ── */
+    .quick-preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      animation: fadeUp 0.18s ease;
+    }
+    .quick-preview.hidden { display: none; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    .qp-cover {
+      width: 32px; height: 48px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: var(--surface-3);
+    }
+    .qp-info { flex: 1; min-width: 0; }
+    .qp-title { font-size: 0.82rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .qp-author { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .qp-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .qp-btn {
+      padding: 5px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .qp-btn.confirm { background: var(--accent); border-color: var(--accent); color: #111; font-weight: 700; }
+    .qp-btn.confirm:hover { opacity: 0.88; }
+    .qp-btn:hover { border-color: var(--text-muted); color: var(--text); }
+
+    /* ── Batch complete modal ── */
+    .batch-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .batch-bar-wrap {
+      background: var(--surface-3);
+      border-radius: 6px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .batch-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 6px;
+      transition: width 0.3s;
+      width: 0%;
+    }
+    .batch-log {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      max-height: 140px;
+      overflow-y: auto;
+      line-height: 1.8;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .batch-log .ok  { color: var(--lido); }
+    .batch-log .skip { color: var(--text-muted); }
+    .batch-log .err { color: #f87171; }
+    .batch-summary {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
     /* ── Setup banner ── */
     .setup-banner {
       background: var(--accent-dim);
@@ -752,6 +853,7 @@
 <header>
   <div class="logo">📚 <span>Minha Biblioteca</span></div>
   <div class="header-right">
+    <button class="btn btn-ghost" onclick="openBatchModal()" title="Completar capas e sinopses faltantes">🔄 Completar dados</button>
     <button class="btn btn-ghost" onclick="openConfig()">⚙ GitHub</button>
   </div>
 </header>
@@ -794,6 +896,18 @@
 </main>
 
 <div class="quick-bar">
+  <div style="width:100%;max-width:680px;display:flex;flex-direction:column">
+  <div class="quick-preview hidden" id="quickPreview">
+    <img class="qp-cover" id="qpCover" src="" alt="" onerror="this.style.display='none'">
+    <div class="qp-info">
+      <div class="qp-title" id="qpTitle"></div>
+      <div class="qp-author" id="qpAuthor"></div>
+    </div>
+    <div class="qp-actions">
+      <button class="qp-btn confirm" onclick="confirmQuickAdd()">✓ Adicionar</button>
+      <button class="qp-btn" onclick="dismissQuickPreview()">✕</button>
+    </div>
+  </div>
   <div class="quick-inner">
     <input
       class="quick-input"
@@ -807,6 +921,7 @@
     <button class="quick-send" id="quickSendBtn" onclick="submitQuickAdd()" title="Adicionar livro">
       <span id="quickSendIcon">↵</span>
     </button>
+  </div>
   </div>
 </div>
 
@@ -834,6 +949,14 @@
         <div class="detail-status-row" id="dStatusRow"></div>
         <div class="stars" id="dStars"></div>
         <div class="detail-meta" id="dMeta"></div>
+
+        <div id="dProgressWrap" style="display:none;border-top:1px solid var(--border);padding-top:10px">
+          <div class="detail-synopsis-label">Progresso de Leitura</div>
+          <div class="progress-wrap" style="margin-top:6px">
+            <div class="progress-bar"><div class="progress-fill" id="dProgressFill" style="width:0%"></div></div>
+            <div class="progress-label" id="dProgressLabel"></div>
+          </div>
+        </div>
 
         <div class="detail-synopsis-wrap">
           <div class="detail-synopsis-label">Sinopse</div>
@@ -952,11 +1075,60 @@
           </div>
         </div>
 
+        <div class="fg2" id="progressFields">
+          <div class="fg" style="margin:0">
+            <label>Página Atual</label>
+            <input type="number" id="fCurrentPage" placeholder="ex: 120" min="0">
+          </div>
+          <div class="fg" style="margin:0">
+            <label>Total de Páginas</label>
+            <input type="number" id="fTotalPages" placeholder="ex: 350" min="1">
+          </div>
+        </div>
+
         <div class="form-actions">
           <button type="button" class="btn btn-ghost" onclick="closeModal('bookModal')">Cancelar</button>
           <button type="submit" class="btn btn-primary">💾 Salvar</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- ── Batch Complete Modal ── -->
+<div class="overlay hidden" id="batchModal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-head">
+      <h2>🔄 Completar Dados Faltantes</h2>
+      <button class="x-btn" id="batchCloseBtn" onclick="closeModal('batchModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="batchReady" class="batch-progress">
+        <div class="info-box" style="margin-bottom:0">
+          Busca automaticamente <strong>sinopses</strong> e <strong>capas</strong> para livros que ainda não têm.
+          Usa ISBN quando disponível (mais preciso) ou título + autor como fallback.<br><br>
+          <span id="batchStats" style="color:var(--text)"></span>
+        </div>
+        <div class="form-actions" style="margin-top:0">
+          <button class="btn btn-ghost" onclick="closeModal('batchModal')">Cancelar</button>
+          <button class="btn btn-primary" id="batchStartBtn" onclick="runBatch()">▶ Iniciar</button>
+        </div>
+      </div>
+      <div id="batchRunning" class="batch-progress" style="display:none">
+        <div class="batch-summary" id="batchSummaryText">Iniciando...</div>
+        <div class="batch-bar-wrap"><div class="batch-bar-fill" id="batchBarFill"></div></div>
+        <div class="batch-log" id="batchLog"></div>
+        <div class="form-actions" style="margin-top:0">
+          <button class="btn btn-ghost" id="batchStopBtn" onclick="stopBatch()">⏹ Parar</button>
+        </div>
+      </div>
+      <div id="batchDone" class="batch-progress" style="display:none">
+        <div class="batch-summary" id="batchDoneText"></div>
+        <div class="batch-log" id="batchDoneLog"></div>
+        <div class="form-actions" style="margin-top:0">
+          <button class="btn btn-primary" onclick="closeModal('batchModal')">✓ Fechar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1102,6 +1274,7 @@ const lsSave = (b) => localStorage.setItem('books', JSON.stringify(b));
 
 // ── Init ───────────────────────────────────────────────────────────────────────
 async function init() {
+  readFiltersFromURL();
   checkSetupBanner();
   showLoading();
 
@@ -1182,6 +1355,7 @@ function renderStats() {
 function setStatFilter(status, loc) {
   filterStatus = status;
   filterLoc    = loc;
+  updateURL();
   renderFilters();
   render();
   renderStats();
@@ -1241,6 +1415,7 @@ function setFilter(type, val) {
   if (type === 'lang')   filterLang   = val;
   if (type === 'genre')  filterGenre  = val;
   if (type === 'noisbn') filterNoIsbn = !filterNoIsbn;
+  updateURL();
   renderFilters();
   renderStats();
   render();
@@ -1248,7 +1423,35 @@ function setFilter(type, val) {
 
 function setSortBy(val) {
   sortBy = val;
+  updateURL();
   render();
+}
+
+// ── URL filter persistence ─────────────────────────────────────────────────────
+function updateURL() {
+  const params = new URLSearchParams();
+  if (filterStatus !== 'all')  params.set('s', filterStatus);
+  if (filterLoc    !== 'all')  params.set('l', filterLoc);
+  if (filterLang   !== 'all')  params.set('lang', filterLang);
+  if (filterGenre  !== 'all')  params.set('g', filterGenre);
+  if (filterNoIsbn)            params.set('noisbn', '1');
+  if (sortBy       !== 'default') params.set('sort', sortBy);
+  const qs = params.toString();
+  history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+}
+
+function readFiltersFromURL() {
+  const p = new URLSearchParams(location.search);
+  if (p.get('s'))     filterStatus = p.get('s');
+  if (p.get('l'))     filterLoc    = p.get('l');
+  if (p.get('lang'))  filterLang   = p.get('lang');
+  if (p.get('g'))     filterGenre  = p.get('g');
+  if (p.get('noisbn')) filterNoIsbn = true;
+  if (p.get('sort'))  {
+    sortBy = p.get('sort');
+    const sel = document.getElementById('sortSelect');
+    if (sel) sel.value = sortBy;
+  }
 }
 
 function render() {
@@ -1337,6 +1540,11 @@ function card(b) {
         <div class="card-title">${esc(b.title)}</div>
         <div class="card-author">${esc(b.author)}</div>
         ${stars}
+        ${b.status === 'lendo' && b.currentPage && b.totalPages ? `
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100,Math.round(b.currentPage/b.totalPages*100))}%"></div></div>
+          <div class="progress-label">${b.currentPage} / ${b.totalPages} págs (${Math.round(b.currentPage/b.totalPages*100)}%)</div>
+        </div>` : ''}
       </div>
 
     </div>`;
@@ -1359,13 +1567,20 @@ async function fetchCoverUrl(title, author) {
 }
 
 let coverSaveTimer;
+let ghSaveInFlight = false;
 function scheduleCoverSave() {
+  // Debounce: waits 10s after last cover/synopsis update, then does a single batch save
   clearTimeout(coverSaveTimer);
   coverSaveTimer = setTimeout(async () => {
+    if (ghSaveInFlight) { scheduleCoverSave(); return; } // retry if another save is running
     lsSave(books);
     const c = cfg();
-    if (c.owner && c.repo && c.token) await ghSave(books);
-  }, 4000);
+    if (c.owner && c.repo && c.token) {
+      ghSaveInFlight = true;
+      await ghSave(books);
+      ghSaveInFlight = false;
+    }
+  }, 10000);
 }
 
 function observeCovers() {
@@ -1494,7 +1709,9 @@ async function searchGoogleBooks(query) {
   } catch { return null; }
 }
 
-// ── Quick-add: submit ─────────────────────────────────────────────────────────
+// ── Quick-add: submit & preview ───────────────────────────────────────────────
+let quickAddPending = null; // holds { found, parsed } while preview is shown
+
 async function submitQuickAdd() {
   const input = document.getElementById('quickInput').value.trim();
   if (!input) return;
@@ -1512,18 +1729,58 @@ async function submitQuickAdd() {
   document.getElementById('quickSendIcon').outerHTML = '<span id="quickSendIcon">↵</span>';
   btn.disabled = false;
 
-  // Pre-fill and open modal
+  if (found) {
+    // Show preview — user confirms before modal opens
+    quickAddPending = { found, parsed };
+    const cover = document.getElementById('qpCover');
+    cover.style.display = found.coverUrl ? '' : 'none';
+    if (found.coverUrl) cover.src = found.coverUrl;
+    document.getElementById('qpTitle').textContent  = found.title;
+    document.getElementById('qpAuthor').textContent = found.author || '—';
+    document.getElementById('quickPreview').classList.remove('hidden');
+  } else {
+    // Nothing found — open modal directly with typed text
+    openAdd({
+      title:    parsed.title  || parsed.searchQuery,
+      author:   parsed.author || '',
+      status:   parsed.status,
+      location: parsed.location,
+    });
+    document.getElementById('quickInput').value = '';
+    toast('Livro não encontrado na API — confira os dados', 'inf');
+  }
+}
+
+function confirmQuickAdd() {
+  if (!quickAddPending) return;
+  const { found, parsed } = quickAddPending;
+  quickAddPending = null;
+  document.getElementById('quickPreview').classList.add('hidden');
+  document.getElementById('quickInput').value = '';
   openAdd({
-    title:    found?.title  || parsed.title  || parsed.searchQuery,
-    author:   found?.author || parsed.author || '',
-    genre:    found?.genre  || '',
+    title:    found.title,
+    author:   found.author,
+    genre:    found.genre,
+    isbn:     found.isbn,
+    coverUrl: found.coverUrl,
     status:   parsed.status,
     location: parsed.location,
   });
+}
 
+function dismissQuickPreview() {
+  if (!quickAddPending) return;
+  const { parsed } = quickAddPending;
+  quickAddPending = null;
+  document.getElementById('quickPreview').classList.add('hidden');
   document.getElementById('quickInput').value = '';
-
-  if (!found) toast('Livro não encontrado na API — confira os dados', 'inf');
+  // Open modal with original typed data (no API result)
+  openAdd({
+    title:    parsed.title  || parsed.searchQuery,
+    author:   parsed.author || '',
+    status:   parsed.status,
+    location: parsed.location,
+  });
 }
 
 // ── Detail Modal ──────────────────────────────────────────────────────────────
@@ -1579,6 +1836,17 @@ async function openDetail(id) {
     ? [1,2,3,4,5].map(i =>
         `<span class="star ${i <= b.rating ? '' : 'empty'}">★</span>`
       ).join('') : '';
+
+  // Reading progress
+  const progressWrap = document.getElementById('dProgressWrap');
+  if (b.status === 'lendo' && b.currentPage && b.totalPages) {
+    const pct = Math.min(100, Math.round(b.currentPage / b.totalPages * 100));
+    document.getElementById('dProgressFill').style.width  = pct + '%';
+    document.getElementById('dProgressLabel').textContent = `${b.currentPage} de ${b.totalPages} páginas · ${pct}%`;
+    progressWrap.style.display = '';
+  } else {
+    progressWrap.style.display = 'none';
+  }
 
   // Dates + ISBN
   const meta = [];
@@ -1649,7 +1917,9 @@ function openAdd(prefill = {}) {
   document.getElementById('fStatus').value  = prefill.status   || 'vou_ler';
   document.getElementById('fLocation').value  = prefill.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = prefill.language || '';
-  document.getElementById('fIsbn').value = prefill.isbn || '';
+  document.getElementById('fIsbn').value         = prefill.isbn || '';
+  document.getElementById('fCurrentPage').value  = '';
+  document.getElementById('fTotalPages').value   = '';
   document.getElementById('bookModal').dataset.isbn     = prefill.isbn     || '';
   document.getElementById('bookModal').dataset.coverUrl = prefill.coverUrl || '';
   updateStars(0);
@@ -1669,9 +1939,11 @@ function openEdit(id) {
   document.getElementById('fStatus').value  = b.status || 'vou_ler';
   document.getElementById('fLocation').value  = b.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = b.language || '';
-  document.getElementById('fIsbn').value      = b.isbn     || '';
-  document.getElementById('fStart').value    = b.startDate || '';
-  document.getElementById('fEnd').value      = b.endDate || '';
+  document.getElementById('fIsbn').value        = b.isbn        || '';
+  document.getElementById('fStart').value      = b.startDate   || '';
+  document.getElementById('fEnd').value        = b.endDate     || '';
+  document.getElementById('fCurrentPage').value = b.currentPage || '';
+  document.getElementById('fTotalPages').value  = b.totalPages  || '';
   updateStars(rating);
   document.getElementById('bookModal').classList.remove('hidden');
 }
@@ -1700,8 +1972,10 @@ async function submitBook(e) {
     rating:    rating || null,
     startDate: document.getElementById('fStart').value || null,
     endDate:   document.getElementById('fEnd').value   || null,
-    isbn:      document.getElementById('fIsbn').value.trim()          || existing?.isbn     || null,
-    coverUrl:  document.getElementById('bookModal').dataset.coverUrl || existing?.coverUrl || null,
+    isbn:        document.getElementById('fIsbn').value.trim()          || existing?.isbn     || null,
+    coverUrl:    document.getElementById('bookModal').dataset.coverUrl || existing?.coverUrl || null,
+    currentPage: parseInt(document.getElementById('fCurrentPage').value) || existing?.currentPage || null,
+    totalPages:  parseInt(document.getElementById('fTotalPages').value)  || existing?.totalPages  || null,
     addedAt:   editId
       ? (existing?.addedAt || new Date().toISOString())
       : new Date().toISOString(),
@@ -1828,6 +2102,107 @@ function copyIsbn(isbn) {
     .then(() => toast('📋 ISBN copiado!', 'ok'))
     .catch(() => toast('Não foi possível copiar', 'err'));
 }
+
+// ── Batch Complete Data ───────────────────────────────────────────────────────
+let batchShouldStop = false;
+
+function openBatchModal() {
+  const noSyn   = books.filter(b => !b.synopsis).length;
+  const noCover = books.filter(b => !b.coverUrl).length;
+  document.getElementById('batchStats').innerHTML =
+    `📖 Sinopses faltando: <strong>${noSyn}</strong><br>🖼 Capas faltando: <strong>${noCover}</strong>`;
+  document.getElementById('batchReady').style.display   = '';
+  document.getElementById('batchRunning').style.display = 'none';
+  document.getElementById('batchDone').style.display    = 'none';
+  document.getElementById('batchModal').classList.remove('hidden');
+}
+
+async function runBatch() {
+  batchShouldStop = false;
+  const targets = books.filter(b => !b.synopsis || !b.coverUrl);
+  if (!targets.length) {
+    toast('✅ Nenhum dado faltando!', 'ok');
+    closeModal('batchModal');
+    return;
+  }
+
+  document.getElementById('batchReady').style.display   = 'none';
+  document.getElementById('batchRunning').style.display = '';
+  document.getElementById('batchLog').innerHTML = '';
+
+  let synUpdated = 0, coverUpdated = 0, idx = 0;
+
+  const addLog = (cls, msg) => {
+    const el = document.getElementById('batchLog');
+    el.innerHTML += `<span class="${cls}">${msg}</span><br>`;
+    el.scrollTop = el.scrollHeight;
+  };
+
+  for (const b of targets) {
+    if (batchShouldStop) break;
+    idx++;
+    const pct = Math.round(idx / targets.length * 100);
+    document.getElementById('batchBarFill').style.width = pct + '%';
+    document.getElementById('batchSummaryText').textContent =
+      `${idx} / ${targets.length} — ${synUpdated} sinopses, ${coverUpdated} capas atualizadas`;
+
+    const bookIdx = books.findIndex(x => x.id === b.id);
+    if (bookIdx < 0) continue;
+
+    let changed = false;
+
+    // ── Fetch synopsis ──
+    if (!books[bookIdx].synopsis) {
+      const syn = await fetchSynopsis(b.isbn, b.title, b.author);
+      if (syn) {
+        books[bookIdx].synopsis = syn.replace(/<[^>]*>/g, '');
+        synUpdated++;
+        changed = true;
+        addLog('ok', `✓ Sinopse: ${b.title}`);
+      } else {
+        addLog('skip', `— Sem sinopse: ${b.title}`);
+      }
+      await sleep(300);
+    }
+
+    // ── Fetch cover ──
+    if (!books[bookIdx].coverUrl) {
+      const url = b.isbn
+        ? `https://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg`
+        : await fetchCoverUrl(b.title, b.author);
+      if (url) {
+        books[bookIdx].coverUrl = url;
+        coverUpdated++;
+        changed = true;
+        addLog('ok', `✓ Capa: ${b.title}`);
+      } else {
+        addLog('skip', `— Sem capa: ${b.title}`);
+      }
+      if (!b.isbn) await sleep(300); // Open Library search needs throttle
+    }
+  }
+
+  // Save once at the end
+  lsSave(books);
+  const c = cfg();
+  if (c.owner && c.repo && c.token) {
+    document.getElementById('batchSummaryText').textContent = 'Salvando no GitHub...';
+    await ghSave(books);
+  }
+
+  render();
+
+  // Show done panel
+  document.getElementById('batchRunning').style.display = 'none';
+  document.getElementById('batchDone').style.display    = '';
+  const stopped = batchShouldStop ? ' (interrompido)' : '';
+  document.getElementById('batchDoneText').textContent  =
+    `✅ Concluído${stopped}: ${synUpdated} sinopses e ${coverUpdated} capas adicionadas.`;
+}
+
+function stopBatch() { batchShouldStop = true; }
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // ── Close on backdrop ──────────────────────────────────────────────────────────
 document.querySelectorAll('.overlay').forEach(o =>
