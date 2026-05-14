@@ -77,8 +77,13 @@
       padding: 14px 20px;
       text-align: center;
       border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
     }
     .stat:last-child { border-right: none; }
+    .stat:hover { background: var(--surface-2); }
+    .stat.active { background: var(--accent-dim); }
 
     .stat-n {
       font-size: 1.6rem;
@@ -649,12 +654,71 @@
     @media (max-width: 600px) {
       header, .stats-bar, .filters, .main { padding-left: 14px; padding-right: 14px; }
       .fg2 { grid-template-columns: 1fr; }
-      .books-grid { grid-template-columns: 1fr; }
+      .books-grid { grid-template-columns: repeat(2, 1fr); }
       .search-wrap { margin-left: 0; width: 100%; }
       .search { width: 100%; }
       .filters { gap: 6px; }
       .quick-hint { display: none; }
       .quick-bar { padding: 10px 12px 16px; }
+    }
+
+    /* ── Sort select ── */
+    .sort-wrap { margin-left: 4px; }
+    .sort-select {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .sort-select:focus, .sort-select:hover { border-color: var(--accent); color: var(--text); }
+    .sort-select option { background: var(--surface-2); color: var(--text); }
+
+    /* ── Quick status change in detail modal ── */
+    .detail-status-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .status-q-btn {
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .status-q-btn:hover { border-color: var(--accent); color: var(--text); }
+    .status-q-btn.active { font-weight: 700; }
+
+    /* ── ISBN copy ── */
+    .isbn-copy {
+      cursor: pointer;
+      border-bottom: 1px dashed var(--text-muted);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .isbn-copy:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── Undo toast ── */
+    .toast-undo {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      padding: 0 0 0 10px;
+      text-decoration: underline;
     }
 
     /* ── Setup banner ── */
@@ -706,8 +770,21 @@
   <div class="filter-sep"></div>
   <div id="langFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
   <div class="filter-sep"></div>
+  <div id="genreFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <div class="filter-sep"></div>
   <div id="noIsbnFilter"></div>
-  <div class="search-wrap">
+  <div class="search-wrap" style="display:flex;gap:8px;align-items:center">
+    <div class="sort-wrap">
+      <select class="sort-select" id="sortSelect" onchange="setSortBy(this.value)">
+        <option value="default">⇅ Padrão</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="rating-desc">★ Nota ↓</option>
+        <option value="rating-asc">★ Nota ↑</option>
+        <option value="date-read">📅 Lido recente</option>
+        <option value="date-added">🆕 Adicionado recente</option>
+      </select>
+    </div>
     <input class="search" id="searchInput" type="text" placeholder="🔍 Buscar..." oninput="render()">
   </div>
 </div>
@@ -754,6 +831,7 @@
           <div class="detail-author" id="dAuthor"></div>
         </div>
         <div class="detail-badges" id="dBadges"></div>
+        <div class="detail-status-row" id="dStatusRow"></div>
         <div class="stars" id="dStars"></div>
         <div class="detail-meta" id="dMeta"></div>
 
@@ -925,7 +1003,7 @@
   </div>
 </div>
 
-<div class="toast hidden" id="toast"></div>
+<div class="toast hidden" id="toast" style="display:flex;align-items:center"></div>
 
 <script>
 // ── State ──────────────────────────────────────────────────────────────────────
@@ -935,7 +1013,11 @@ let editId = null;
 let filterStatus  = 'all';
 let filterLoc     = 'all';
 let filterLang    = 'all';
+let filterGenre   = 'all';
 let filterNoIsbn  = false;
+let sortBy        = 'default';
+let undoBook      = null;
+let undoTimer     = null;
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 const cfg = () => ({
@@ -1075,16 +1157,34 @@ function renderStats() {
   const vou    = books.filter(b => b.status === 'vou_ler' && b.location !== 'precisa_baixar').length;
   const baixar = books.filter(b => b.location === 'precisa_baixar').length;
 
-  const s = (n, l, c) =>
-    `<div class="stat"><div class="stat-n" style="color:${c}">${n}</div><div class="stat-l">${l}</div></div>`;
+  // active class: which stat matches current filter state
+  const isAll    = filterStatus === 'all' && filterLoc === 'all';
+  const isLido   = filterStatus === 'lido'    && filterLoc === 'all';
+  const isLendo  = filterStatus === 'lendo'   && filterLoc === 'all';
+  const isVou    = filterStatus === 'vou_ler' && filterLoc === 'all';
+  const isBaixar = filterLoc === 'precisa_baixar' && filterStatus === 'all';
+
+  const s = (n, l, c, onclick, active) =>
+    `<div class="stat${active?' active':''}" onclick="${onclick}" title="Clique para filtrar">
+      <div class="stat-n" style="color:${c}">${n}</div>
+      <div class="stat-l">${l}</div>
+    </div>`;
 
   document.getElementById('statsBar').innerHTML =
-    s(all,   'Total',         'var(--text)') +
-    s(lidos, 'Lidos',         'var(--lido)') +
-    s(yr_r,  `Lidos ${yr}`,   'var(--lido)') +
-    s(lendo, 'Lendo',         'var(--lendo)') +
-    s(vou,   'Vou Ler',       'var(--vou-ler)') +
-    s(baixar,'Preciso Baixar','var(--baixar)');
+    s(all,   'Total',         'var(--text)',    "setStatFilter('all','all')",       isAll) +
+    s(lidos, 'Lidos',         'var(--lido)',    "setStatFilter('lido','all')",      isLido) +
+    s(yr_r,  `Lidos ${yr}`,   'var(--lido)',    "setStatFilter('lido','all')",      false) +
+    s(lendo, 'Lendo',         'var(--lendo)',   "setStatFilter('lendo','all')",     isLendo) +
+    s(vou,   'Vou Ler',       'var(--vou-ler)', "setStatFilter('vou_ler','all')",   isVou) +
+    s(baixar,'Preciso Baixar','var(--baixar)',  "setStatFilter('all','precisa_baixar')", isBaixar);
+}
+
+function setStatFilter(status, loc) {
+  filterStatus = status;
+  filterLoc    = loc;
+  renderFilters();
+  render();
+  renderStats();
 }
 
 function renderFilters() {
@@ -1113,6 +1213,23 @@ function renderFilters() {
     return `<button class="fb ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}')">${label}</button>`;
   }).join('');
 
+  // Genre filter — dynamic from data
+  const GENRE_LABEL = {
+    fiction:'Ficção', nonfiction:'Não-ficção', scifi:'Sci-fi', fantasy:'Fantasia',
+    mystery:'Mistério', romance:'Romance', history:'História', philosophy:'Filosofia',
+    psychology:'Psicologia', business:'Negócios', selfhelp:'Autoajuda',
+    biography:'Biografia', tech:'Tecnologia', other:'Outro'
+  };
+  const genres = Array.from(new Set(books.map(b => b.genre).filter(Boolean))).sort();
+  if (genres.length) {
+    const gBtns = [['all','📚 Todos'], ...genres.map(g => [g, GENRE_LABEL[g] || g])];
+    document.getElementById('genreFilters').innerHTML = gBtns.map(([k, l]) =>
+      `<button class="fb ${filterGenre===k?'active':''}" onclick="setFilter('genre','${k}')">${l}</button>`
+    ).join('');
+  } else {
+    document.getElementById('genreFilters').innerHTML = '';
+  }
+
   const noIsbnCount = books.filter(b => !b.isbn).length;
   document.getElementById('noIsbnFilter').innerHTML =
     `<button class="fb ${filterNoIsbn?'active':''}" onclick="setFilter('noisbn','')">⚠ Sem ISBN (${noIsbnCount})</button>`;
@@ -1122,8 +1239,15 @@ function setFilter(type, val) {
   if (type === 's')      filterStatus = val;
   if (type === 'l')      filterLoc    = val;
   if (type === 'lang')   filterLang   = val;
+  if (type === 'genre')  filterGenre  = val;
   if (type === 'noisbn') filterNoIsbn = !filterNoIsbn;
   renderFilters();
+  renderStats();
+  render();
+}
+
+function setSortBy(val) {
+  sortBy = val;
   render();
 }
 
@@ -1134,15 +1258,23 @@ function render() {
     const okS    = filterStatus === 'all' || b.status   === filterStatus;
     const okL    = filterLoc   === 'all' || b.location  === filterLoc;
     const okLang = filterLang  === 'all' || b.language  === filterLang;
+    const okGenre= filterGenre === 'all' || b.genre     === filterGenre;
     const okIsbn = !filterNoIsbn || !b.isbn;
     const okQ = !q || b.title.toLowerCase().includes(q) ||
                 b.author.toLowerCase().includes(q) ||
                 (b.genre||'').toLowerCase().includes(q) ||
                 (b.language||'').toLowerCase().includes(q);
-    return okS && okL && okLang && okIsbn && okQ;
+    return okS && okL && okLang && okGenre && okIsbn && okQ;
   });
 
-  list.sort((a,b) => {
+  list.sort((a, b) => {
+    if (sortBy === 'az')           return a.title.localeCompare(b.title, 'pt');
+    if (sortBy === 'za')           return b.title.localeCompare(a.title, 'pt');
+    if (sortBy === 'rating-desc')  return (b.rating||0) - (a.rating||0);
+    if (sortBy === 'rating-asc')   return (a.rating||0) - (b.rating||0);
+    if (sortBy === 'date-read')    return (b.endDate||'0').localeCompare(a.endDate||'0');
+    if (sortBy === 'date-added')   return (b.addedAt||'0').localeCompare(a.addedAt||'0');
+    // default: lendo first, then lido, then vou_ler
     const o = { lendo:0, lido:1, vou_ler:2 };
     return (o[a.status]??3) - (o[b.status]??3);
   });
@@ -1407,21 +1539,24 @@ async function openDetail(id) {
   document.getElementById('dTitleMain').textContent = b.title;
   document.getElementById('dAuthor').textContent    = b.author;
 
-  // Cover
+  // Cover — use -L (large) quality for the detail modal
   const img = document.getElementById('dCover');
   const ph  = document.getElementById('dCoverPh');
   ph.textContent = GENRE_ICON[b.genre] || '📚';
-  if (b.coverUrl) {
+  const largeCoverUrl = b.coverUrl
+    ? b.coverUrl.replace(/-M\.jpg$/, '-L.jpg').replace(/-S\.jpg$/, '-L.jpg')
+    : null;
+  if (largeCoverUrl) {
     img.style.display = 'block';
     ph.style.display  = 'none';
-    img.src = b.coverUrl;
+    img.src = largeCoverUrl;
   } else {
     img.style.display = 'none';
     ph.style.display  = 'flex';
-    // Fetch with title + author
+    // Fetch with title + author (use -L for modal display)
     fetchCoverUrl(b.title, b.author).then(url => {
       if (!url) return;
-      img.src = url;
+      img.src = url.replace(/-M\.jpg$/, '-L.jpg');
       img.style.display = 'block';
       ph.style.display  = 'none';
       const idx = books.findIndex(x => x.id === b.id);
@@ -1430,11 +1565,14 @@ async function openDetail(id) {
   }
 
   // Badges
-  const locBadge  = b.location ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '';
   const LANG_FLAG = { 'Português':'🇧🇷','Inglês':'🇬🇧','Espanhol':'🇪🇸','Francês':'🇫🇷','Alemão':'🇩🇪','Italiano':'🇮🇹','Japonês':'🇯🇵' };
+  const locBadge  = b.location ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '';
   const langBadge = b.language ? `<span class="badge" style="background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border)">${LANG_FLAG[b.language]||'🌐'} ${b.language}</span>` : '';
   document.getElementById('dBadges').innerHTML =
     `<span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>${locBadge}${langBadge}`;
+
+  // Quick status row
+  renderDetailStatus(b);
 
   // Stars
   document.getElementById('dStars').innerHTML = b.rating
@@ -1446,9 +1584,9 @@ async function openDetail(id) {
   const meta = [];
   if (b.startDate) meta.push(`Início: ${fmt(b.startDate)}`);
   if (b.endDate)   meta.push(`Fim: ${fmt(b.endDate)}`);
-  if (b.isbn)      meta.push(`ISBN: ${b.isbn}`);
+  if (b.isbn)      meta.push(`ISBN: <span class="isbn-copy" onclick="copyIsbn('${b.isbn}')" title="Clique para copiar">${b.isbn}</span>`);
   else             meta.push('⚠ Sem ISBN');
-  document.getElementById('dMeta').textContent = meta.join('  ·  ');
+  document.getElementById('dMeta').innerHTML = meta.join('  ·  ');
 
   // Synopsis
   const synEl = document.getElementById('dSynopsis');
@@ -1595,27 +1733,100 @@ async function submitBook(e) {
 }
 
 async function del(id) {
-  if (!confirm('Remover este livro?')) return;
+  const book = books.find(b => b.id === id);
+  if (!book) return;
+
+  // Store for undo
+  undoBook = book;
+  clearTimeout(undoTimer);
+  undoTimer = setTimeout(() => { undoBook = null; }, 6000);
+
   books = books.filter(b => b.id !== id);
   lsSave(books);
   renderStats(); renderFilters(); render();
+
+  // Show toast with undo button
+  const el = document.getElementById('toast');
+  el.className = 'toast err';
+  el.innerHTML = `<span>"${book.title}" removido</span><button class="toast-undo" onclick="undoDelete()">Desfazer</button>`;
+  clearTimeout(toastT);
+  toastT = setTimeout(() => el.classList.add('hidden'), 6000);
+
   const c = cfg();
-  if (c.owner && c.repo && c.token) {
-    await ghSave(books);
-    toast('✅ Removido e sincronizado', 'ok');
-  } else {
-    toast('✅ Removido', 'ok');
-  }
+  if (c.owner && c.repo && c.token) ghSave(books);
+}
+
+async function undoDelete() {
+  if (!undoBook) return;
+  clearTimeout(undoTimer);
+  const restored = undoBook;
+  undoBook = null;
+  books = [...books, restored];
+  lsSave(books);
+  renderStats(); renderFilters(); render();
+  const c = cfg();
+  if (c.owner && c.repo && c.token) ghSave(books);
+  toast('✅ "' + restored.title + '" restaurado!', 'ok');
 }
 
 // ── Toast ──────────────────────────────────────────────────────────────────────
 let toastT;
 function toast(msg, type) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
+  el.innerHTML = `<span>${msg}</span>`;
   el.className = `toast ${type}`;
   clearTimeout(toastT);
   toastT = setTimeout(() => el.classList.add('hidden'), 3200);
+}
+
+// ── Quick status change from detail modal ─────────────────────────────────────
+async function quickChangeStatus(id, newStatus) {
+  const idx = books.findIndex(b => b.id === id);
+  if (idx < 0) return;
+  books[idx].status = newStatus;
+  // Auto-set endDate when marking as read and no endDate yet
+  if (newStatus === 'lido' && !books[idx].endDate) {
+    books[idx].endDate = new Date().toISOString().split('T')[0];
+  }
+  // Auto-set startDate when marking as reading and no startDate yet
+  if (newStatus === 'lendo' && !books[idx].startDate) {
+    books[idx].startDate = new Date().toISOString().split('T')[0];
+  }
+  lsSave(books);
+  renderStats(); renderFilters(); render();
+
+  // Update status row + badges inline (no full re-open, avoids re-fetching synopsis)
+  const b = books[idx];
+  renderDetailStatus(b);
+  document.getElementById('dBadges').innerHTML =
+    `<span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>` +
+    (b.location ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>` : '') +
+    (b.language ? `<span class="badge" style="background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border)">${({'Português':'🇧🇷','Inglês':'🇬🇧','Espanhol':'🇪🇸','Francês':'🇫🇷','Alemão':'🇩🇪','Italiano':'🇮🇹','Japonês':'🇯🇵'}[b.language]||'🌐')} ${b.language}</span>` : '');
+
+  const c = cfg();
+  if (c.owner && c.repo && c.token) await ghSave(books);
+  toast('✅ Status atualizado!', 'ok');
+}
+
+function renderDetailStatus(b) {
+  const statuses = [
+    ['vou_ler', 'Vou Ler',  'var(--vou-ler)'],
+    ['lendo',   'Lendo',    'var(--lendo)'],
+    ['lido',    'Lido',     'var(--lido)'],
+  ];
+  document.getElementById('dStatusRow').innerHTML = statuses.map(([val, label, color]) => {
+    const isActive = b.status === val;
+    return `<button class="status-q-btn${isActive?' active':''}"
+      style="${isActive ? `background:${color};color:#111;border-color:${color}` : ''}"
+      onclick="quickChangeStatus('${b.id}','${val}')">${label}</button>`;
+  }).join('');
+}
+
+// ── Copy ISBN ─────────────────────────────────────────────────────────────────
+function copyIsbn(isbn) {
+  navigator.clipboard.writeText(isbn)
+    .then(() => toast('📋 ISBN copiado!', 'ok'))
+    .catch(() => toast('Não foi possível copiar', 'err'));
 }
 
 // ── Close on backdrop ──────────────────────────────────────────────────────────
