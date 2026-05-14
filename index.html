@@ -100,14 +100,63 @@
 
     /* ── Filters ── */
     .filters {
-      padding: 14px 32px;
+      padding: 10px 32px;
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
       border-bottom: 1px solid var(--border);
       background: var(--surface);
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .filters::-webkit-scrollbar { display: none; }
+
+    /* ── Filter dropdowns ── */
+    .fd { position: relative; flex-shrink: 0; }
+    .fd-btn {
+      padding: 5px 11px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .fd-btn:hover { border-color: var(--accent); color: var(--text); }
+    .fd-btn.active { background: var(--accent); border-color: var(--accent); color: #111; font-weight: 700; }
+    .fd-arrow { font-size: 0.55rem; opacity: 0.55; transition: transform 0.15s; }
+    .fd-btn.open .fd-arrow { transform: rotate(180deg); }
+    .fd-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 5px;
+      z-index: 500;
+      min-width: 150px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    }
+    .fd-panel.hidden { display: none; }
+    .fd-opt {
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.81rem;
+      white-space: nowrap;
+      transition: background 0.1s;
+      color: var(--text-muted);
+    }
+    .fd-opt:hover { background: var(--surface-3); color: var(--text); }
+    .fd-opt.active { background: var(--accent-dim); color: var(--accent); font-weight: 600; }
 
     .filter-sep { width: 1px; height: 28px; background: var(--border); margin: 0 2px; }
 
@@ -207,8 +256,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      background: var(--surface-3);
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: rgba(255,255,255,0.6);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      font-family: inherit;
     }
 
     /* Badges overlay on cover */
@@ -282,9 +335,18 @@
       text-overflow: ellipsis;
     }
 
-    .stars { display: flex; gap: 2px; margin-top: 4px; }
+    .stars { display: flex; gap: 2px; margin-top: 5px; }
     .star  { font-size: 0.7rem; color: var(--accent); }
-    .star.empty { color: var(--surface-3); }
+    .star.empty { color: #2d2d52; }
+
+    /* ── Card location indicator ── */
+    .card-loc {
+      font-size: 0.63rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
 
     /* ── No-ISBN badge ── */
     .no-isbn {
@@ -325,12 +387,16 @@
     .detail-cover-ph {
       width: 100%;
       aspect-ratio: 2 / 3;
-      background: var(--surface-2);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3.5rem;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: rgba(255,255,255,0.65);
+      text-shadow: 0 2px 14px rgba(0,0,0,0.6);
+      font-family: inherit;
     }
 
     .detail-right {
@@ -390,11 +456,27 @@
       font-size: 0.83rem;
       line-height: 1.65;
       color: var(--text);
-      max-height: 180px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
+    .detail-synopsis.expanded {
+      display: block;
+      overflow: visible;
+    }
+    .synopsis-toggle {
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+    }
+    .synopsis-toggle:hover { text-decoration: underline; }
 
     .synopsis-loading {
       display: flex;
@@ -888,8 +970,8 @@
 <header>
   <div class="logo">📚 <span>Minha Biblioteca</span></div>
   <div class="header-right">
-    <button class="btn btn-ghost" onclick="openBatchModal()" title="Completar capas e sinopses faltantes">🔄 Completar dados</button>
-    <button class="btn btn-ghost" onclick="openConfig()">⚙ GitHub</button>
+    <button class="btn btn-ghost" onclick="openBatchModal()" title="Completar capas e sinopses faltantes" style="padding:9px 12px;font-size:1rem">🔄</button>
+    <button class="btn btn-ghost" onclick="openConfig()" style="padding:9px 12px;font-size:0.95rem">⚙</button>
   </div>
 </header>
 
@@ -901,27 +983,46 @@
 <div class="stats-bar" id="statsBar"></div>
 
 <div class="filters">
-  <div id="statusFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <!-- Status pills (sempre visíveis) -->
+  <div id="statusFilters" style="display:flex;gap:5px;flex-shrink:0"></div>
+
   <div class="filter-sep"></div>
-  <div id="locFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-  <div class="filter-sep"></div>
-  <div id="langFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-  <div class="filter-sep"></div>
-  <div id="genreFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-  <div class="filter-sep"></div>
-  <div id="noIsbnFilter"></div>
-  <div class="search-wrap" style="display:flex;gap:8px;align-items:center">
-    <div class="sort-wrap">
-      <select class="sort-select" id="sortSelect" onchange="setSortBy(this.value)">
-        <option value="default">⇅ Padrão</option>
-        <option value="az">A → Z</option>
-        <option value="za">Z → A</option>
-        <option value="rating-desc">★ Nota ↓</option>
-        <option value="rating-asc">★ Nota ↑</option>
-        <option value="date-read">📅 Lido recente</option>
-        <option value="date-added">🆕 Adicionado recente</option>
-      </select>
-    </div>
+
+  <!-- Dropdowns compactos -->
+  <div class="fd" id="fdLoc">
+    <button class="fd-btn" id="fdLocBtn" onclick="toggleFd('fdLoc')">
+      <span id="fdLocLabel">Local</span><span class="fd-arrow">▾</span>
+    </button>
+    <div class="fd-panel hidden" id="fdLocPanel"></div>
+  </div>
+
+  <div class="fd" id="fdLang">
+    <button class="fd-btn" id="fdLangBtn" onclick="toggleFd('fdLang')">
+      <span id="fdLangLabel">Idioma</span><span class="fd-arrow">▾</span>
+    </button>
+    <div class="fd-panel hidden" id="fdLangPanel"></div>
+  </div>
+
+  <div class="fd" id="fdGenre">
+    <button class="fd-btn" id="fdGenreBtn" onclick="toggleFd('fdGenre')">
+      <span id="fdGenreLabel">Gênero</span><span class="fd-arrow">▾</span>
+    </button>
+    <div class="fd-panel hidden" id="fdGenrePanel"></div>
+  </div>
+
+  <div id="noIsbnFilter" style="flex-shrink:0"></div>
+
+  <!-- Right: sort + busca -->
+  <div style="display:flex;gap:8px;align-items:center;margin-left:auto;flex-shrink:0">
+    <select class="sort-select" id="sortSelect" onchange="setSortBy(this.value)">
+      <option value="default">⇅ Padrão</option>
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+      <option value="rating-desc">★ Nota ↓</option>
+      <option value="rating-asc">★ Nota ↑</option>
+      <option value="date-read">📅 Lido recente</option>
+      <option value="date-added">🆕 Adicionado recente</option>
+    </select>
     <input class="search" id="searchInput" type="text" placeholder="🔍 Buscar..." oninput="render()">
   </div>
 </div>
@@ -963,8 +1064,7 @@
 <!-- ── Detail Modal ── -->
 <div class="overlay hidden" id="detailModal">
   <div class="modal detail-modal">
-    <div class="modal-head">
-      <h2 id="dTitle" style="font-size:1rem;line-height:1.3"></h2>
+    <div class="modal-head" style="justify-content:flex-end;border-bottom:none;padding:14px 20px 0">
       <button class="x-btn" onclick="closeModal('detailModal')">✕</button>
     </div>
     <div class="detail-body">
@@ -1227,6 +1327,20 @@ let undoBook      = null;
 let undoTimer     = null;
 let pageShown     = 48;   // pagination: how many books are rendered at once
 
+// ── Cover placeholder helpers ─────────────────────────────────────────────────
+const PH_GRADIENTS = [
+  ['#0f1f3d','#1a3a6b'], ['#1a0533','#4a1a7a'], ['#0d2010','#1a5c20'],
+  ['#2a0a0a','#7a2020'], ['#0d1a2e','#1a4a7a'], ['#1f180a','#6b4a10'],
+  ['#0d1f1f','#1a5c5c'], ['#1f0d1a','#6b1a55'],
+];
+function phGradient(title) {
+  const i = ((title.charCodeAt(0)||0) + (title.charCodeAt(1)||0)) % PH_GRADIENTS.length;
+  return PH_GRADIENTS[i];
+}
+function phInitials(title) {
+  return title.split(/\s+/).filter(Boolean).slice(0,2).map(w => w[0].toUpperCase()).join('') || '?';
+}
+
 // ── Genre display ↔ key mapping ───────────────────────────────────────────────
 const GENRE_LABEL = {
   fiction:'Ficção', nonfiction:'Não-ficção', scifi:'Sci-fi', fantasy:'Fantasia',
@@ -1431,47 +1545,53 @@ function renderFilters() {
     ['fisico','📗 Físico'], ['precisa_baixar','⬇ Preciso Baixar'],
   ];
 
+  // Status pills (always visible)
   document.getElementById('statusFilters').innerHTML = sts.map(([k,l]) =>
     `<button class="fb ${filterStatus===k?'active':''}" onclick="setFilter('s','${k}')">${l}</button>`
   ).join('');
 
-  document.getElementById('locFilters').innerHTML = locs.map(([k,l]) =>
-    `<button class="fb ${filterLoc===k?'active':''}" onclick="setFilter('l','${k}')">${l}</button>`
+  // Location dropdown
+  const fdLocPanel = document.getElementById('fdLocPanel');
+  fdLocPanel.innerHTML = locs.map(([k,l]) =>
+    `<div class="fd-opt ${filterLoc===k?'active':''}" onclick="setFilter('l','${k}');closeFd('fdLoc')">${l}</div>`
   ).join('');
+  const locActive = locs.find(([k]) => k === filterLoc);
+  document.getElementById('fdLocLabel').textContent = locActive && filterLoc !== 'all' ? locActive[1] : 'Local';
+  document.getElementById('fdLocBtn').classList.toggle('active', filterLoc !== 'all');
 
-  // Language filters — built dynamically from book data
+  // Language dropdown (dynamic)
   const LANG_FLAG = { 'Português':'🇧🇷','Inglês':'🇬🇧','Espanhol':'🇪🇸','Francês':'🇫🇷','Alemão':'🇩🇪','Italiano':'🇮🇹','Japonês':'🇯🇵' };
-  const langs = ['all', ...Array.from(new Set(books.map(b => b.language).filter(Boolean))).sort()];
-  document.getElementById('langFilters').innerHTML = langs.map(k => {
-    const label = k === 'all' ? '🌐 Todos' : `${LANG_FLAG[k]||'🌐'} ${k}`;
-    return `<button class="fb ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}')">${label}</button>`;
-  }).join('');
+  const langs = Array.from(new Set(books.map(b => b.language).filter(Boolean))).sort();
+  const fdLangPanel = document.getElementById('fdLangPanel');
+  fdLangPanel.innerHTML = [['all','🌐 Todos'], ...langs.map(k => [k, `${LANG_FLAG[k]||'🌐'} ${k}`])].map(([k,l]) =>
+    `<div class="fd-opt ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}');closeFd('fdLang')">${l}</div>`
+  ).join('');
+  document.getElementById('fdLangLabel').textContent = filterLang !== 'all' ? `${LANG_FLAG[filterLang]||'🌐'} ${filterLang}` : 'Idioma';
+  document.getElementById('fdLangBtn').classList.toggle('active', filterLang !== 'all');
 
-  // Genre filter — dynamic from data (also updates the datalist with custom genres)
+  // Genre dropdown (dynamic)
   const genres = Array.from(new Set(books.map(b => b.genre).filter(Boolean))).sort();
-  if (genres.length) {
-    const gBtns = [['all','📚 Todos'], ...genres.map(g => [g, genreDisplay(g)])];
-    document.getElementById('genreFilters').innerHTML = gBtns.map(([k, l]) =>
-      `<button class="fb ${filterGenre===k?'active':''}" onclick="setFilter('genre','${k}')">${l}</button>`
-    ).join('');
-    // Inject custom genres into the datalist so they appear as suggestions
-    const dl = document.getElementById('fGenreList');
-    if (dl) {
-      const existing = Array.from(dl.options).map(o => o.value);
-      genres.forEach(g => {
-        const disp = genreDisplay(g);
-        if (!existing.includes(disp)) {
-          const opt = document.createElement('option'); opt.value = disp; dl.appendChild(opt);
-        }
-      });
-    }
-  } else {
-    document.getElementById('genreFilters').innerHTML = '';
+  const fdGenrePanel = document.getElementById('fdGenrePanel');
+  fdGenrePanel.innerHTML = [['all','📚 Todos'], ...genres.map(g => [g, genreDisplay(g)])].map(([k,l]) =>
+    `<div class="fd-opt ${filterGenre===k?'active':''}" onclick="setFilter('genre','${k}');closeFd('fdGenre')">${l}</div>`
+  ).join('');
+  const gLabel = filterGenre !== 'all' ? genreDisplay(filterGenre) : 'Gênero';
+  document.getElementById('fdGenreLabel').textContent = gLabel;
+  document.getElementById('fdGenreBtn').classList.toggle('active', filterGenre !== 'all');
+  // Inject custom genres into the add-form datalist
+  const dl = document.getElementById('fGenreList');
+  if (dl) {
+    const existing = Array.from(dl.options).map(o => o.value);
+    genres.forEach(g => {
+      const disp = genreDisplay(g);
+      if (!existing.includes(disp)) { const opt = document.createElement('option'); opt.value = disp; dl.appendChild(opt); }
+    });
   }
 
+  // No-ISBN badge (compact)
   const noIsbnCount = books.filter(b => !b.isbn).length;
   document.getElementById('noIsbnFilter').innerHTML =
-    `<button class="fb ${filterNoIsbn?'active':''}" onclick="setFilter('noisbn','')">⚠ Sem ISBN (${noIsbnCount})</button>`;
+    `<button class="fb${filterNoIsbn?' active':''}" style="font-size:0.75rem;padding:4px 10px" onclick="setFilter('noisbn','')">⚠ ${noIsbnCount} s/ ISBN</button>`;
 }
 
 function setFilter(type, val) {
@@ -1584,16 +1704,22 @@ function loadMore() {
 
 function card(b) {
   const locClass = b.location === 'precisa_baixar' ? 'loc-precisa_baixar' : '';
-  // Sempre renderiza 5 estrelas — garante altura uniforme entre cards
-  const stars = `<div class="stars">${[1,2,3,4,5].map(i =>
-    `<span class="star ${i <= (b.rating||0) ? '' : 'empty'}">★</span>`
-  ).join('')}</div>`;
 
-  const locBadge = b.location
-    ? `<span class="badge b-${b.location}">${LOC_LABEL[b.location]||b.location}</span>`
-    : '';
+  // Stars: only if there's a rating
+  const stars = b.rating ? `<div class="stars">${[1,2,3,4,5].map(i =>
+    `<span class="star ${i <= b.rating ? '' : 'empty'}">★</span>`
+  ).join('')}</div>` : '';
 
+  // Cover placeholder: gradient + initials
+  const [c1, c2] = phGradient(b.title);
   const hasCover = !!b.coverUrl;
+  const phStyle = `display:${hasCover?'none':'flex'};background:linear-gradient(150deg,${c1},${c2})`;
+
+  // Location as small text in card-info (not badge on cover)
+  const LOC_ICON = { kindle:'📱', fisico:'📗', precisa_baixar:'⬇' };
+  const locText = b.location
+    ? `<div class="card-loc">${LOC_ICON[b.location]||''} ${LOC_LABEL[b.location]||b.location}</div>`
+    : '';
 
   return `
     <div class="card status-${b.status} ${locClass}" onclick="openDetail('${b.id}')">
@@ -1610,11 +1736,10 @@ function card(b) {
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           loading="lazy"
         >
-        <div class="card-cover-ph" style="${hasCover ? 'display:none' : 'display:flex'}">${GENRE_ICON[b.genre]||'📚'}</div>
+        <div class="card-cover-ph" style="${phStyle}">${phInitials(b.title)}</div>
 
         <div class="card-overlay">
           <span class="badge b-${b.status}">${STATUS_LABEL[b.status]||b.status}</span>
-          ${locBadge}
         </div>
 
         <button class="card-del" onclick="event.stopPropagation();del('${b.id}')">🗑</button>
@@ -1624,11 +1749,12 @@ function card(b) {
       <div class="card-info">
         <div class="card-title">${esc(b.title)}</div>
         <div class="card-author">${esc(b.author)}</div>
+        ${locText}
         ${stars}
         ${b.status === 'lendo' && b.currentPage && b.totalPages ? `
         <div class="progress-wrap">
           <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100,Math.round(b.currentPage/b.totalPages*100))}%"></div></div>
-          <div class="progress-label">${b.currentPage} / ${b.totalPages} págs (${Math.round(b.currentPage/b.totalPages*100)}%)</div>
+          <div class="progress-label">${b.currentPage} / ${b.totalPages} págs · ${Math.round(b.currentPage/b.totalPages*100)}%</div>
         </div>` : ''}
       </div>
 
@@ -1881,15 +2007,17 @@ async function openDetail(id) {
   if (!b) return;
   detailBookId = id;
 
-  // Header + title/author
-  document.getElementById('dTitle').textContent     = b.title;
+  // Title/author (no more duplicate in header)
   document.getElementById('dTitleMain').textContent = b.title;
   document.getElementById('dAuthor').textContent    = b.author;
 
   // Cover — use -L (large) quality for the detail modal
   const img = document.getElementById('dCover');
   const ph  = document.getElementById('dCoverPh');
-  ph.textContent = GENRE_ICON[b.genre] || '📚';
+  // Gradient placeholder + initials
+  const [pc1, pc2] = phGradient(b.title);
+  ph.style.background = `linear-gradient(150deg,${pc1},${pc2})`;
+  ph.textContent = phInitials(b.title);
   const largeCoverUrl = b.coverUrl
     ? b.coverUrl.replace(/-M\.jpg$/, '-L.jpg').replace(/-S\.jpg$/, '-L.jpg')
     : null;
@@ -1949,7 +2077,7 @@ async function openDetail(id) {
   // Synopsis
   const synEl = document.getElementById('dSynopsis');
   if (b.synopsis) {
-    synEl.textContent = b.synopsis;
+    setSynopsisText(synEl, b.synopsis);
   } else {
     synEl.innerHTML =
       '<span class="synopsis-loading"><span class="spin" style="width:14px;height:14px;border-width:2px;margin:0;display:inline-block;vertical-align:middle"></span> &nbsp;Buscando sinopse...</span>';
@@ -1958,7 +2086,7 @@ async function openDetail(id) {
       synEl.textContent = '⚠ Limite da API atingido. Feche e abra novamente em alguns minutos.';
     } else {
       const clean = syn ? syn.replace(/<[^>]*>/g, '') : 'Sinopse não encontrada.';
-      synEl.textContent = clean;
+      setSynopsisText(synEl, clean);
       if (syn) {
         const idx = books.findIndex(x => x.id === id);
         if (idx >= 0) { books[idx].synopsis = clean; scheduleCoverSave(); }
@@ -2149,6 +2277,26 @@ function toast(msg, type) {
   toastT = setTimeout(() => el.classList.add('hidden'), 3200);
 }
 
+// ── Synopsis expand/collapse ──────────────────────────────────────────────────
+function setSynopsisText(el, text) {
+  el.textContent = text;
+  el.classList.remove('expanded');
+  // Remove previous toggle button if any
+  const prev = el.nextElementSibling;
+  if (prev?.classList.contains('synopsis-toggle')) prev.remove();
+  // Only add "ver mais" if text is long enough to be clamped
+  if (text.length > 240) {
+    const btn = document.createElement('button');
+    btn.className = 'synopsis-toggle';
+    btn.textContent = 'Ver mais ↓';
+    btn.onclick = () => {
+      el.classList.toggle('expanded');
+      btn.textContent = el.classList.contains('expanded') ? 'Ver menos ↑' : 'Ver mais ↓';
+    };
+    el.insertAdjacentElement('afterend', btn);
+  }
+}
+
 // ── Quick status change from detail modal ─────────────────────────────────────
 async function quickChangeStatus(id, newStatus) {
   const idx = books.findIndex(b => b.id === id);
@@ -2302,6 +2450,35 @@ async function runBatch() {
 function stopBatch() { batchShouldStop = true; }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// ── Filter dropdowns ──────────────────────────────────────────────────────────
+function toggleFd(id) {
+  const panel = document.getElementById(id + 'Panel');
+  const btn   = document.getElementById(id + 'Btn');
+  const isOpen = !panel.classList.contains('hidden');
+  // Close all first
+  ['fdLoc','fdLang','fdGenre'].forEach(d => {
+    document.getElementById(d + 'Panel').classList.add('hidden');
+    document.getElementById(d + 'Btn').classList.remove('open');
+  });
+  if (!isOpen) {
+    panel.classList.remove('hidden');
+    btn.classList.add('open');
+  }
+}
+function closeFd(id) {
+  document.getElementById(id + 'Panel').classList.add('hidden');
+  document.getElementById(id + 'Btn').classList.remove('open');
+}
+// Close dropdowns when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.fd')) {
+    ['fdLoc','fdLang','fdGenre'].forEach(d => {
+      document.getElementById(d + 'Panel')?.classList.add('hidden');
+      document.getElementById(d + 'Btn')?.classList.remove('open');
+    });
+  }
+});
 
 // ── Close on backdrop ──────────────────────────────────────────────────────────
 document.querySelectorAll('.overlay').forEach(o =>
