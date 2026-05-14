@@ -822,6 +822,41 @@
       color: var(--text);
     }
 
+    /* ── Load-more ── */
+    .load-more-wrap {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 0 8px;
+    }
+    .load-more-btn {
+      padding: 9px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .load-more-btn:hover { border-color: var(--accent); color: var(--text); }
+    .page-count { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── Keyboard shortcut hint ── */
+    .kbd {
+      display: inline-block;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 0.7rem;
+      font-family: monospace;
+      color: var(--text-muted);
+    }
+
     /* ── Setup banner ── */
     .setup-banner {
       background: var(--accent-dim);
@@ -996,23 +1031,23 @@
         <div class="fg2">
           <div class="fg" style="margin:0">
             <label>Gênero</label>
-            <select id="fGenre">
-              <option value="">Selecionar...</option>
-              <option value="fiction">📖 Ficção</option>
-              <option value="nonfiction">📰 Não-ficção</option>
-              <option value="scifi">🚀 Sci-fi</option>
-              <option value="fantasy">🧙 Fantasia</option>
-              <option value="mystery">🔍 Mistério</option>
-              <option value="romance">💕 Romance</option>
-              <option value="history">🏛 História</option>
-              <option value="philosophy">🤔 Filosofia</option>
-              <option value="psychology">🧠 Psicologia</option>
-              <option value="business">💼 Negócios</option>
-              <option value="selfhelp">⭐ Autoajuda</option>
-              <option value="biography">👤 Biografia</option>
-              <option value="tech">💻 Tecnologia</option>
-              <option value="other">📚 Outro</option>
-            </select>
+            <input type="text" id="fGenre" list="fGenreList" placeholder="ex: Ficção, Sci-fi..." autocomplete="off">
+            <datalist id="fGenreList">
+              <option value="Ficção">
+              <option value="Não-ficção">
+              <option value="Sci-fi">
+              <option value="Fantasia">
+              <option value="Mistério">
+              <option value="Romance">
+              <option value="História">
+              <option value="Filosofia">
+              <option value="Psicologia">
+              <option value="Negócios">
+              <option value="Autoajuda">
+              <option value="Biografia">
+              <option value="Tecnologia">
+              <option value="Outro">
+            </datalist>
           </div>
           <div class="fg" style="margin:0">
             <label>Status</label>
@@ -1190,6 +1225,21 @@ let filterNoIsbn  = false;
 let sortBy        = 'default';
 let undoBook      = null;
 let undoTimer     = null;
+let pageShown     = 48;   // pagination: how many books are rendered at once
+
+// ── Genre display ↔ key mapping ───────────────────────────────────────────────
+const GENRE_LABEL = {
+  fiction:'Ficção', nonfiction:'Não-ficção', scifi:'Sci-fi', fantasy:'Fantasia',
+  mystery:'Mistério', romance:'Romance', history:'História', philosophy:'Filosofia',
+  psychology:'Psicologia', business:'Negócios', selfhelp:'Autoajuda',
+  biography:'Biografia', tech:'Tecnologia', other:'Outro'
+};
+// Reverse: display name → storage key (also accepts free text as-is)
+const GENRE_KEY = Object.fromEntries(Object.entries(GENRE_LABEL).map(([k,v]) => [v, k]));
+// Resolve any stored value to its display label (falls through for custom genres)
+const genreDisplay = g => GENRE_LABEL[g] || g;
+// Resolve typed display name back to a storage key (or keep as custom string)
+const genreNormalize = g => GENRE_KEY[g] || g || '';
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 const cfg = () => ({
@@ -1242,7 +1292,7 @@ async function ghFetch() {
   } catch(e) { console.warn('ghFetch', e); return null; }
 }
 
-async function ghSave(newBooks) {
+async function ghSave(newBooks, retrying = false) {
   const c = cfg();
   if (!c.owner || !c.repo || !c.token) return false;
   const current = await ghFetch();
@@ -1264,6 +1314,16 @@ async function ghSave(newBooks) {
         body: JSON.stringify(body),
       }
     );
+    if (r.status === 409 && !retrying) {
+      // SHA conflict: another device saved concurrently — re-fetch and retry once
+      console.warn('ghSave: 409 conflict, retrying...');
+      await sleep(800);
+      return ghSave(newBooks, true);
+    }
+    if (r.status === 403 || r.status === 429) {
+      toast('⚠ Limite de requisições do GitHub atingido. Tente em alguns minutos.', 'err');
+      return false;
+    }
     return r.ok;
   } catch(e) { console.warn('ghSave', e); return false; }
 }
@@ -1387,19 +1447,24 @@ function renderFilters() {
     return `<button class="fb ${filterLang===k?'active':''}" onclick="setFilter('lang','${k}')">${label}</button>`;
   }).join('');
 
-  // Genre filter — dynamic from data
-  const GENRE_LABEL = {
-    fiction:'Ficção', nonfiction:'Não-ficção', scifi:'Sci-fi', fantasy:'Fantasia',
-    mystery:'Mistério', romance:'Romance', history:'História', philosophy:'Filosofia',
-    psychology:'Psicologia', business:'Negócios', selfhelp:'Autoajuda',
-    biography:'Biografia', tech:'Tecnologia', other:'Outro'
-  };
+  // Genre filter — dynamic from data (also updates the datalist with custom genres)
   const genres = Array.from(new Set(books.map(b => b.genre).filter(Boolean))).sort();
   if (genres.length) {
-    const gBtns = [['all','📚 Todos'], ...genres.map(g => [g, GENRE_LABEL[g] || g])];
+    const gBtns = [['all','📚 Todos'], ...genres.map(g => [g, genreDisplay(g)])];
     document.getElementById('genreFilters').innerHTML = gBtns.map(([k, l]) =>
       `<button class="fb ${filterGenre===k?'active':''}" onclick="setFilter('genre','${k}')">${l}</button>`
     ).join('');
+    // Inject custom genres into the datalist so they appear as suggestions
+    const dl = document.getElementById('fGenreList');
+    if (dl) {
+      const existing = Array.from(dl.options).map(o => o.value);
+      genres.forEach(g => {
+        const disp = genreDisplay(g);
+        if (!existing.includes(disp)) {
+          const opt = document.createElement('option'); opt.value = disp; dl.appendChild(opt);
+        }
+      });
+    }
   } else {
     document.getElementById('genreFilters').innerHTML = '';
   }
@@ -1415,6 +1480,7 @@ function setFilter(type, val) {
   if (type === 'lang')   filterLang   = val;
   if (type === 'genre')  filterGenre  = val;
   if (type === 'noisbn') filterNoIsbn = !filterNoIsbn;
+  pageShown = 48;
   updateURL();
   renderFilters();
   renderStats();
@@ -1423,6 +1489,7 @@ function setFilter(type, val) {
 
 function setSortBy(val) {
   sortBy = val;
+  pageShown = 48;
   updateURL();
   render();
 }
@@ -1487,14 +1554,32 @@ function render() {
       <div class="empty">
         <div class="empty-icon">📭</div>
         <h3>${books.length === 0 ? 'Biblioteca vazia' : 'Nenhum livro encontrado'}</h3>
-        <p>${books.length === 0 ? 'Clique no + para adicionar seu primeiro livro!' : 'Tente outros filtros.'}</p>
+        <p>${books.length === 0 ? 'Use a barra abaixo para adicionar!' : 'Tente outros filtros.'}</p>
       </div>`;
     return;
   }
 
+  // Pagination: only render first `pageShown` books
+  const visible  = list.slice(0, pageShown);
+  const hasMore  = list.length > pageShown;
+
+  const loadMoreHTML = hasMore ? `
+    <div class="load-more-wrap">
+      <button class="load-more-btn" onclick="loadMore()">
+        Mostrar mais (${list.length - pageShown} restantes)
+      </button>
+      <span class="page-count">Exibindo ${visible.length} de ${list.length}</span>
+    </div>` : (list.length > 48 ? `<div class="load-more-wrap"><span class="page-count">Exibindo todos os ${list.length} livros</span></div>` : '');
+
   document.getElementById('booksGrid').innerHTML =
-    `<div class="books-grid">${list.map(card).join('')}</div>`;
+    `<div class="books-grid">${visible.map(card).join('')}${loadMoreHTML}</div>`;
   observeCovers();
+}
+
+function loadMore() {
+  pageShown += 48;
+  render();
+  // keep scroll position (don't jump to top)
 }
 
 function card(b) {
@@ -1560,6 +1645,7 @@ async function fetchCoverUrl(title, author) {
     if (title)  params.set('title', title);
     if (author) params.set('author', author);
     const r = await fetch(`https://openlibrary.org/search.json?${params}`);
+    if (r.status === 429) { console.warn('Open Library rate limit'); return null; }
     const d = await r.json();
     const covId = d.docs?.[0]?.cover_i;
     return covId ? `https://covers.openlibrary.org/b/id/${covId}-M.jpg` : null;
@@ -1689,6 +1775,10 @@ async function searchGoogleBooks(query) {
   try {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=1`;
     const r = await fetch(url);
+    if (r.status === 429 || r.status === 403) {
+      toast('⚠ Limite da API do Google Books atingido. Aguarde alguns minutos.', 'err');
+      return null;
+    }
     if (!r.ok) return null;
     const data = await r.json();
     if (!data.items?.length) return null;
@@ -1864,11 +1954,15 @@ async function openDetail(id) {
     synEl.innerHTML =
       '<span class="synopsis-loading"><span class="spin" style="width:14px;height:14px;border-width:2px;margin:0;display:inline-block;vertical-align:middle"></span> &nbsp;Buscando sinopse...</span>';
     const syn = await fetchSynopsis(b.isbn, b.title, b.author);
-    const clean = syn ? syn.replace(/<[^>]*>/g, '') : 'Sinopse não encontrada.';
-    synEl.textContent = clean;
-    if (syn) {
-      const idx = books.findIndex(x => x.id === id);
-      if (idx >= 0) { books[idx].synopsis = clean; scheduleCoverSave(); }
+    if (syn === '__rate_limit__') {
+      synEl.textContent = '⚠ Limite da API atingido. Feche e abra novamente em alguns minutos.';
+    } else {
+      const clean = syn ? syn.replace(/<[^>]*>/g, '') : 'Sinopse não encontrada.';
+      synEl.textContent = clean;
+      if (syn) {
+        const idx = books.findIndex(x => x.id === id);
+        if (idx >= 0) { books[idx].synopsis = clean; scheduleCoverSave(); }
+      }
     }
   }
 
@@ -1882,6 +1976,7 @@ async function fetchSynopsis(isbn, title, author) {
       const r = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&maxResults=1`
       );
+      if (r.status === 429 || r.status === 403) return '__rate_limit__';
       const d = await r.json();
       const desc = d.items?.[0]?.volumeInfo?.description;
       if (desc) return desc;
@@ -1894,6 +1989,7 @@ async function fetchSynopsis(isbn, title, author) {
     const r = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=1`
     );
+    if (r.status === 429 || r.status === 403) return '__rate_limit__';
     const d = await r.json();
     return d.items?.[0]?.volumeInfo?.description || null;
   } catch { return null; }
@@ -1913,7 +2009,7 @@ function openAdd(prefill = {}) {
   document.getElementById('fId').value      = '';
   document.getElementById('fTitle').value   = prefill.title    || '';
   document.getElementById('fAuthor').value  = prefill.author   || '';
-  document.getElementById('fGenre').value   = prefill.genre    || '';
+  document.getElementById('fGenre').value   = genreDisplay(prefill.genre || '');
   document.getElementById('fStatus').value  = prefill.status   || 'vou_ler';
   document.getElementById('fLocation').value  = prefill.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = prefill.language || '';
@@ -1935,7 +2031,7 @@ function openEdit(id) {
   document.getElementById('fId').value      = id;
   document.getElementById('fTitle').value   = b.title || '';
   document.getElementById('fAuthor').value  = b.author || '';
-  document.getElementById('fGenre').value   = b.genre || '';
+  document.getElementById('fGenre').value   = genreDisplay(b.genre || '');
   document.getElementById('fStatus').value  = b.status || 'vou_ler';
   document.getElementById('fLocation').value  = b.location || 'precisa_baixar';
   document.getElementById('fLanguage').value  = b.language || '';
@@ -1965,7 +2061,7 @@ async function submitBook(e) {
     id:        editId || crypto.randomUUID(),
     title:     document.getElementById('fTitle').value.trim(),
     author:    document.getElementById('fAuthor').value.trim(),
-    genre:     document.getElementById('fGenre').value,
+    genre:     genreNormalize(document.getElementById('fGenre').value),
     status:    document.getElementById('fStatus').value,
     location:  document.getElementById('fLocation').value,
     language:  document.getElementById('fLanguage').value,
@@ -2154,7 +2250,10 @@ async function runBatch() {
     // ── Fetch synopsis ──
     if (!books[bookIdx].synopsis) {
       const syn = await fetchSynopsis(b.isbn, b.title, b.author);
-      if (syn) {
+      if (syn === '__rate_limit__') {
+        addLog('err', `⚠ Rate limit atingido — parando.`);
+        batchShouldStop = true;
+      } else if (syn) {
         books[bookIdx].synopsis = syn.replace(/<[^>]*>/g, '');
         synUpdated++;
         changed = true;
@@ -2208,6 +2307,90 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 document.querySelectorAll('.overlay').forEach(o =>
   o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); })
 );
+
+// ── Keyboard shortcuts ─────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  const tag  = document.activeElement?.tagName;
+  const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+  const anyModalOpen = () => !document.getElementById('bookModal').classList.contains('hidden')
+    || !document.getElementById('detailModal').classList.contains('hidden')
+    || !document.getElementById('configModal').classList.contains('hidden')
+    || !document.getElementById('batchModal').classList.contains('hidden');
+
+  // ESC — close topmost open modal
+  if (e.key === 'Escape') {
+    const modals = ['bookModal','detailModal','configModal','batchModal'];
+    for (const id of modals.reverse()) {
+      if (!document.getElementById(id).classList.contains('hidden')) {
+        closeModal(id); break;
+      }
+    }
+    // Also dismiss quick-add preview
+    if (!document.getElementById('quickPreview').classList.contains('hidden')) {
+      dismissQuickPreview();
+    }
+    return;
+  }
+
+  // Shortcuts that only fire when no modal is open and user isn't typing
+  if (anyModalOpen() || typing) return;
+
+  // N or / — focus quick-add input
+  if (e.key === 'n' || e.key === 'N') {
+    e.preventDefault();
+    document.getElementById('quickInput').focus();
+    return;
+  }
+
+  // F — focus search
+  if (e.key === 'f' || e.key === 'F') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+    return;
+  }
+
+  // E — edit current detail book (if detail modal just closed, still valid)
+  if ((e.key === 'e' || e.key === 'E') && detailBookId) {
+    openEdit(detailBookId);
+    return;
+  }
+
+  // ← → — navigate between books in detail modal
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    if (!document.getElementById('detailModal').classList.contains('hidden') && detailBookId) {
+      const filtered = getFilteredList();
+      const idx = filtered.findIndex(b => b.id === detailBookId);
+      if (idx < 0) return;
+      const next = e.key === 'ArrowRight'
+        ? filtered[idx + 1]
+        : filtered[idx - 1];
+      if (next) openDetail(next.id);
+    }
+  }
+});
+
+// Helper: returns the current filtered+sorted list (same logic as render())
+function getFilteredList() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  return books.filter(b => {
+    const okS    = filterStatus === 'all' || b.status   === filterStatus;
+    const okL    = filterLoc   === 'all' || b.location  === filterLoc;
+    const okLang = filterLang  === 'all' || b.language  === filterLang;
+    const okGenre= filterGenre === 'all' || b.genre     === filterGenre;
+    const okIsbn = !filterNoIsbn || !b.isbn;
+    const okQ    = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
+    return okS && okL && okLang && okGenre && okIsbn && okQ;
+  }).sort((a, b) => {
+    if (sortBy === 'az')          return a.title.localeCompare(b.title, 'pt');
+    if (sortBy === 'za')          return b.title.localeCompare(a.title, 'pt');
+    if (sortBy === 'rating-desc') return (b.rating||0) - (a.rating||0);
+    if (sortBy === 'rating-asc')  return (a.rating||0) - (b.rating||0);
+    if (sortBy === 'date-read')   return (b.endDate||'0').localeCompare(a.endDate||'0');
+    if (sortBy === 'date-added')  return (b.addedAt||'0').localeCompare(a.addedAt||'0');
+    const o = { lendo:0, lido:1, vou_ler:2 };
+    return (o[a.status]??3) - (o[b.status]??3);
+  });
+}
 
 // ── Go ─────────────────────────────────────────────────────────────────────────
 init();
